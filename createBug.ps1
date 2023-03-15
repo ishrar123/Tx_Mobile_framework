@@ -25,8 +25,8 @@ function GetUrl() {
     return $areaUrl
 }
 
-$orgUrl = "https://lolinc.visualstudio.com"
-$personalToken = "2vqfbm5x36kj2eektsur5dhfwzqpwkomvomfptp7vw33nqr4faha"
+$orgUrl = "https://dev.azure.com/CBACIT"
+$personalToken = "rzcbnkbfjlqpzvk4qzttnxnbietuqh2y524abk7raeunxrd6qeia"
 
 Write-Host "Initialize authentication context" -ForegroundColor Yellow
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($personalToken)"))
@@ -55,7 +55,7 @@ $projects.value  | ForEach-Object {
     $tfsBaseUrl = GetUrl -orgUrl $orgUrl -header $header -AreaId $testAreaId
 
     #  https://docs.microsoft.com/en-us/rest/api/azure/devops/test/runs/list?view=azure-devops-rest-6.0
-    if ($project -eq "DevSecOps") {
+    if ($project -eq "Tx-Automate Framework") {
         $testRunUrl = "$tfsBaseUrl/$project/_apis/test/runs?api-version=6.0"
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $testRunResultsUri = Invoke-RestMethod -Uri $testRunUrl -Method Get -ContentType "application/json" -Headers $header
@@ -81,15 +81,15 @@ $projects.value  | ForEach-Object {
     $project = $_.name
     $workTrackingAreaId = "85f8c7b6-92fe-4ba6-8b6d-fbb67c809341"
     $workitemType = "Bug"
-    $Area = "Data Analytics"
-    $AssignedTo = "D, Smitha"
+    $Area = "Tx-Automate Framework"
+    $AssignedTo = "vaishali.tomar"
     $Reason = "New"
     $tags = "Automation"
     $tfsBaseUrl = GetUrl -orgUrl $orgUrl -header $header -AreaId $testAreaId
     $tfsWorkTrackingItemUrl = GetUrl -orgUrl $orgUrl -header $header -AreaId $workTrackingAreaId
 
     # https://docs.microsoft.com/en-us/rest/api/azure/devops/test/results/list?view=azure-devops-rest-6.0
-    if ($project -eq "DevSecOps") {
+    if ($project -eq "Tx-Automate Framework") {
         $testResultsRunUrl = "$tfsBaseUrl/$project/_apis/test/Runs/$lastRunId/results?api-version=6.0"
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         $lastTestSuiteResult = Invoke-RestMethod $testResultsRunUrl -Method Get -ContentType "application/json" -Headers $header
