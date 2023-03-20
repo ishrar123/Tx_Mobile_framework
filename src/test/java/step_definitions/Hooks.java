@@ -29,7 +29,7 @@ public class Hooks {
     String pathForLogger;
     String screenshotFilePath;
 
-    @Before("@Dummy")
+    @Before("@CBA_Testcases")
     public void beforeMethodAmazon(Scenario scenario) {
 
 //        if (scenario.getName().contains("_"))
@@ -144,7 +144,7 @@ public class Hooks {
         }
     }
 
-    @After("@Dummy")
+    @After("@CBA_Testcases")
     public void afterMethodSmoke(Scenario scenario) {
         String testId;
         if (scenario.getName().contains("_"))
@@ -221,19 +221,19 @@ public class Hooks {
             LogUtil.infoLog(Hooks.class,
                     "Test has ended closing browser: " + GlobalUtil.getCommonSettings().getBrowser());
             // updating the results in Test management tool
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-                GlobalUtil.testlinkapi.updateTestLinkResult(testId, "This test is passed",
-                        TestLinkAPIResults.TEST_PASSED);
-            }
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                GlobalUtil.jiraapi.updateJiraTestResults(testId, "This test is passed", "Pass");
-            }
-
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
-                GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_PASSED);
-
-            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-                KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                GlobalUtil.testlinkapi.updateTestLinkResult(testId, "This test is passed",
+//                        TestLinkAPIResults.TEST_PASSED);
+//            }
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                GlobalUtil.jiraapi.updateJiraTestResults(testId, "This test is passed", "Pass");
+//            }
+//
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
+//                GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_PASSED);
+//
+//            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
+//                KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
         }
 
         // close the browsers
@@ -311,7 +311,7 @@ public class Hooks {
         RunCukesTest.extent.endTest(RunCukesTest.logger);
     }
 
-    //    @After("")
+    //    @After("@firsttestcase1")
     public void afterMobileTestMethod(Scenario scenario) {
         String testName;
 

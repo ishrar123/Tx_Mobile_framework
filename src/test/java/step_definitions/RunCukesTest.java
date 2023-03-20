@@ -19,8 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-@CucumberOptions(features = "classpath:features", plugin = {"pretty", "html:target/cucumber-html-report.html",
-        "json:target/cucumber.json"}, tags = "@Dummy", monochrome = true
+@CucumberOptions(features = "classpath:features/CBA/CBA_Web_testcases.feature", plugin = {"pretty", "html:target/cucumber-html-report.html",
+        "json:target/cucumber.json"},tags="@CBA1", monochrome = true
 )
 public class RunCukesTest extends AbstractTestNGCucumberTests {
 
@@ -90,51 +90,52 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
                 executionEnv = ConfigReader.getValue("defaultExecutionEnvironment");
 
             // testlink config
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Testlink")) {
-                TestLinkUtil.DEV_KEY = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
-                TestLinkUtil.SERVER_URL = "http://" + GlobalUtil.getCommonSettings().getTestLinkHostName()
-                        + "/testlink-1.9.16/lib/api/xmlrpc/v1/xmlrpc.php";
-                TestLinkUtil.projectName = GlobalUtil.getCommonSettings().getTestlinkProjectName();
-                TestLinkUtil.testPlanName = GlobalUtil.getCommonSettings().getTestlinkPlanName();
-                TestLinkUtil.buildName = GlobalUtil.getCommonSettings().getBuildNumber();
-                TestLinkUtil.needUpdate = GlobalUtil.getCommonSettings().getTestlinkTool();
-                GlobalUtil.testlinkapi = new TestLinkUtil();
-            }
-
-            //ADO Config for Test Management
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps")) {
-                // Jira Test management config
-                AzureDevOpsUtil.ADO_URI = GlobalUtil.getCommonSettings().getTestLinkHostName();
-                AzureDevOpsUtil.ADO_PAT = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
-                AzureDevOpsUtil.ADO_PROJECT_NAME = GlobalUtil.getCommonSettings().getTestlinkProjectName();
-                AzureDevOpsUtil.ADO_TEST_PLAN_NAME = GlobalUtil.getCommonSettings().getTestlinkPlanName();
-                AzureDevOpsUtil.ADO_ORG_NAME = GlobalUtil.getCommonSettings().getTestlinkOrgName();
-                AzureDevOpsUtil.SUITE_ID = GlobalUtil.getCommonSettings().getTestLinkSuiteId();
-                GlobalUtil.azureDevOpsApi = new AzureDevOpsUtil();
-
-                // remaining details will initialized when Jira is selected a bug
-                // tracking tool
-            } else
-                GlobalUtil.getCommonSettings().setTestlinkTool("NO");
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Testlink")) {
+//                TestLinkUtil.DEV_KEY = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
+//                TestLinkUtil.SERVER_URL = "http://" + GlobalUtil.getCommonSettings().getTestLinkHostName()
+//                        + "/testlink-1.9.16/lib/api/xmlrpc/v1/xmlrpc.php";
+//                TestLinkUtil.projectName = GlobalUtil.getCommonSettings().getTestlinkProjectName();
+//                TestLinkUtil.testPlanName = GlobalUtil.getCommonSettings().getTestlinkPlanName();
+//                TestLinkUtil.buildName = GlobalUtil.getCommonSettings().getBuildNumber();
+//                TestLinkUtil.needUpdate = GlobalUtil.getCommonSettings().getTestlinkTool();
+//                GlobalUtil.testlinkapi = new TestLinkUtil();
+//            }
+//
+//            //ADO Config for Test Management
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps")) {
+//                // Jira Test management config
+//                AzureDevOpsUtil.ADO_URI = GlobalUtil.getCommonSettings().getTestLinkHostName();
+//                AzureDevOpsUtil.ADO_PAT = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
+//                AzureDevOpsUtil.ADO_PROJECT_NAME = GlobalUtil.getCommonSettings().getTestlinkProjectName();
+//                AzureDevOpsUtil.ADO_TEST_PLAN_NAME = GlobalUtil.getCommonSettings().getTestlinkPlanName();
+//                AzureDevOpsUtil.ADO_ORG_NAME = GlobalUtil.getCommonSettings().getTestlinkOrgName();
+//                AzureDevOpsUtil.SUITE_ID = GlobalUtil.getCommonSettings().getTestLinkSuiteId();
+//                GlobalUtil.azureDevOpsApi = new AzureDevOpsUtil();
+//
+//                // remaining details will initialized when Jira is selected a bug
+//                // tracking tool
+//            } else
+//                GlobalUtil.getCommonSettings().setTestlinkTool("NO");
 
             // setting up of Bug tracking "MANTIS" tool configuration
-            if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
-                ConnectMantis.MANTIS_URL = "http://" + GlobalUtil.getCommonSettings().getbugToolHostName()
-                        + "/bugTool/api/soap/bugToolconnect.php";
-                ConnectMantis.MANTIS_USER = GlobalUtil.getCommonSettings().getbugToolUserName();
-                ConnectMantis.MANTIS_PWD = GlobalUtil.getCommonSettings().getbugToolPassword();
-                ConnectMantis.MANTIS_PROJET = GlobalUtil.getCommonSettings().getbugToolProjectName();
-            }
-
-            // setting up of Bug tracking "Jira" tool configuration
-            if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-                JiraUtil.JIRA_URL = GlobalUtil.getCommonSettings().getbugToolHostName();
-                JiraUtil.USERNAME = GlobalUtil.getCommonSettings().getbugToolUserName();
-                JiraUtil.PASSWORD = GlobalUtil.getCommonSettings().getbugToolPassword();
-                JiraUtil.JIRA_PROJECT = GlobalUtil.getCommonSettings().getbugToolProjectName();
-                GlobalUtil.jiraapi = new JiraUtil();
-            } else
-                GlobalUtil.getCommonSettings().setbugTool("NO");
+//            if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                ConnectMantis.MANTIS_URL = "http://" + GlobalUtil.getCommonSettings().getbugToolHostName()
+//                        + "/bugTool/api/soap/bugToolconnect.php";
+//                ConnectMantis.MANTIS_USER = GlobalUtil.getCommonSettings().getbugToolUserName();
+//                ConnectMantis.MANTIS_PWD = GlobalUtil.getCommonSettings().getbugToolPassword();
+//                ConnectMantis.MANTIS_PROJET = GlobalUtil.getCommonSettings().getbugToolProjectName();
+//            }
+////
+////            // setting up of Bug tracking "Jira" tool configuration
+////            if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+////                JiraUtil.JIRA_URL = GlobalUtil.getCommonSettings().getbugToolHostName();
+////                JiraUtil.USERNAME = GlobalUtil.getCommonSettings().getbugToolUserName();
+////                JiraUtil.PASSWORD = GlobalUtil.getCommonSettings().getbugToolPassword();
+////                JiraUtil.JIRA_PROJECT = GlobalUtil.getCommonSettings().getbugToolProjectName();
+////                GlobalUtil.jiraapi = new JiraUtil();
+//   //         }
+//        else
+//                GlobalUtil.getCommonSettings().setbugTool("NO");
 
             if (url == null) {
                 url = ConfigReader.getValue("BASE_URL");
