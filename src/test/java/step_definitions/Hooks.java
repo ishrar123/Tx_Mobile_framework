@@ -155,7 +155,7 @@ public class Hooks {
         if (scenario.isFailed()) {
             try {
                 //Taking Screenshot and putting into the report
-             /*   String scFileName = "ScreenShot_" + System.currentTimeMillis();
+               String scFileName = "ScreenShot_" + System.currentTimeMillis();
                 String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
@@ -168,7 +168,7 @@ public class Hooks {
                         HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) + GlobalUtil.e);
 
                 byte[] screenshot = KeywordUtil.takeScreenshot(imagePath);
-                scenario.attach(screenshot, "image/png", "Failed Screenshot");*/
+                scenario.attach(screenshot, "image/png", "Failed Screenshot");
 
                 // report the bug
                 String bugID = "Please check the Bug tool Configuration";
@@ -221,19 +221,19 @@ public class Hooks {
             LogUtil.infoLog(Hooks.class,
                     "Test has ended closing browser: " + GlobalUtil.getCommonSettings().getBrowser());
             // updating the results in Test management tool
-//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-//                GlobalUtil.testlinkapi.updateTestLinkResult(testId, "This test is passed",
-//                        TestLinkAPIResults.TEST_PASSED);
-//            }
-//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-//                GlobalUtil.jiraapi.updateJiraTestResults(testId, "This test is passed", "Pass");
-//            }
-//
-//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
-//                GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_PASSED);
-//
-//            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-//                KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
+            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+                GlobalUtil.testlinkapi.updateTestLinkResult(testId, "This test is passed",
+                        TestLinkAPIResults.TEST_PASSED);
+            }
+            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+                GlobalUtil.jiraapi.updateJiraTestResults(testId, "This test is passed", "Pass");
+            }
+
+            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
+                GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_PASSED);
+
+            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
+                KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
         }
 
         // close the browsers

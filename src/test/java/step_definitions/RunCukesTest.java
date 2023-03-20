@@ -101,21 +101,21 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
 //                GlobalUtil.testlinkapi = new TestLinkUtil();
 //            }
 //
-//            //ADO Config for Test Management
-//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps")) {
-//                // Jira Test management config
-//                AzureDevOpsUtil.ADO_URI = GlobalUtil.getCommonSettings().getTestLinkHostName();
-//                AzureDevOpsUtil.ADO_PAT = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
-//                AzureDevOpsUtil.ADO_PROJECT_NAME = GlobalUtil.getCommonSettings().getTestlinkProjectName();
-//                AzureDevOpsUtil.ADO_TEST_PLAN_NAME = GlobalUtil.getCommonSettings().getTestlinkPlanName();
-//                AzureDevOpsUtil.ADO_ORG_NAME = GlobalUtil.getCommonSettings().getTestlinkOrgName();
-//                AzureDevOpsUtil.SUITE_ID = GlobalUtil.getCommonSettings().getTestLinkSuiteId();
-//                GlobalUtil.azureDevOpsApi = new AzureDevOpsUtil();
-//
-//                // remaining details will initialized when Jira is selected a bug
-//                // tracking tool
-//            } else
-//                GlobalUtil.getCommonSettings().setTestlinkTool("NO");
+            //ADO Config for Test Management
+            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps")) {
+                // Jira Test management config
+                AzureDevOpsUtil.ADO_URI = GlobalUtil.getCommonSettings().getTestLinkHostName();
+                AzureDevOpsUtil.ADO_PAT = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
+                AzureDevOpsUtil.ADO_PROJECT_NAME = GlobalUtil.getCommonSettings().getTestlinkProjectName();
+                AzureDevOpsUtil.ADO_TEST_PLAN_NAME = GlobalUtil.getCommonSettings().getTestlinkPlanName();
+                AzureDevOpsUtil.ADO_ORG_NAME = GlobalUtil.getCommonSettings().getTestlinkOrgName();
+                AzureDevOpsUtil.SUITE_ID = GlobalUtil.getCommonSettings().getTestLinkSuiteId();
+                GlobalUtil.azureDevOpsApi = new AzureDevOpsUtil();
+
+                // remaining details will initialized when Jira is selected a bug
+                // tracking tool
+            } else
+                GlobalUtil.getCommonSettings().setTestlinkTool("NO");
 
             // setting up of Bug tracking "MANTIS" tool configuration
 //            if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
