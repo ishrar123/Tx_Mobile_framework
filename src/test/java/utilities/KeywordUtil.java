@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import step_definitions.RunCukesTest;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -30,34 +32,35 @@ import java.util.zip.ZipOutputStream;
  */
 public class KeywordUtil extends GlobalUtil {
     /**
-     * The constant VALUE.
+     * The constant cucumberTagName.
      */
-    public static final String VALUE = "value";
+    public static String cucumberTagName;
+    private static final int DEFAULT_WAIT_SECONDS = 50;
+    public static String os = System.getProperty("os.name").toLowerCase();
     /**
      * The constant FAIL.
      */
     protected static final int FAIL = 0;
-    private static final int DEFAULT_WAIT_SECONDS = 50;
-    private static final String userDir = "user.dir";
-    @SuppressWarnings("unused")
-    private static final String text = "";
-    /**
-     * The constant cucumberTagName.
-     */
-    public static String cucumberTagName;
-    public static String os = System.getProperty("os.name").toLowerCase();
-    /**
-     * The constant lastAction.
-     */
-    public static String lastAction = "";
-    /**
-     * The constant url.
-     */
-    protected static String url = "";
     /**
      * The Web element.
      */
     static WebElement webElement;
+    /**
+     * The constant url.
+     */
+    protected static String url = "";
+    private static final String userDir = "user.dir";
+    @SuppressWarnings("unused")
+    private static final String text = "";
+    /**
+     * The constant VALUE.
+     */
+    public static final String VALUE = "value";
+    /**
+     * The constant lastAction.
+     */
+    public static String lastAction = "";
+
     /**
      * The Result folder name.
      */
@@ -163,6 +166,7 @@ public class KeywordUtil extends GlobalUtil {
     }
 
 
+
     /**
      * Take mobile screenshot byte [ ].
      *
@@ -246,16 +250,6 @@ public class KeywordUtil extends GlobalUtil {
         wait.ignoring(WebDriverException.class);
 
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
-    public static void waitForURLToBe(String url) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_WAIT_SECONDS);
-        wait.until(ExpectedConditions.urlToBe(url));
-    }
-
-    public static void waitForURLContains(String url) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_WAIT_SECONDS);
-        wait.until(ExpectedConditions.urlContains(url));
     }
 
     /**
@@ -661,6 +655,18 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    public static boolean isWebElementselected(By locator,String log) {
+        try {
+            KeywordUtil.lastAction = "Check Element visible: " + locator.toString();
+            LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
+            WebElement elm = waitForVisible(locator);
+            return elm.isSelected();
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
     /**
      * Is web element visible boolean.
      *
@@ -679,6 +685,13 @@ public class KeywordUtil extends GlobalUtil {
             return false;
         }
     }
+
+    public static void waitForURLContains(String url) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_WAIT_SECONDS);
+        wait.until(ExpectedConditions.urlContains(url));
+    }
+
+
 
     /**
      * Is mobile element visible boolean.
@@ -733,7 +746,7 @@ public class KeywordUtil extends GlobalUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
         return getDriver().findElements(locator);
     }
 
@@ -1410,6 +1423,30 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
+     * Verify current date input boolean.
+     *
+     * @param locator the locator
+     * @param logStep the log step
+     * @return boolean
+     */
+    public boolean verifyCurrentDateInput(By locator, String logStep) {
+        boolean flag = false;
+        WebElement element = waitForVisible(locator);
+        String actual = element.getAttribute(VALUE).trim();
+        DateFormat dtFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        dtFormat.setTimeZone(TimeZone.getTimeZone("US/Central"));
+        String expected = dtFormat.format(date).trim();
+        if (actual.trim().contains(expected)) {
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+
+            flag = true;
+
+        }
+        return flag;
+    }
+
+    /**
      * Upload files using send keys boolean.
      *
      * @param locator the locator
@@ -1426,6 +1463,26 @@ public class KeywordUtil extends GlobalUtil {
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
 
         return true;
+    }
+
+    /**
+     * Del directory boolean.
+     *
+     * @return boolean
+     */
+    public boolean delDirectory() {
+        File delDestination = new File(System.getProperty(userDir) + "\\src\\test\\resources\\downloadFile");
+        if (delDestination.exists()) {
+            File[] files = delDestination.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    delDirectory();
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return delDestination.delete();
     }
 
     /**
@@ -1612,50 +1669,6 @@ public class KeywordUtil extends GlobalUtil {
         df.setMinimumFractionDigits(4);
         String newNum = df.format(num);
         return newNum;
-    }
-
-    /**
-     * Verify current date input boolean.
-     *
-     * @param locator the locator
-     * @param logStep the log step
-     * @return boolean
-     */
-    public boolean verifyCurrentDateInput(By locator, String logStep) {
-        boolean flag = false;
-        WebElement element = waitForVisible(locator);
-        String actual = element.getAttribute(VALUE).trim();
-        DateFormat dtFormat = new SimpleDateFormat("MM/dd/yyyy");
-        Date date = new Date();
-        dtFormat.setTimeZone(TimeZone.getTimeZone("US/Central"));
-        String expected = dtFormat.format(date).trim();
-        if (actual.trim().contains(expected)) {
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
-
-            flag = true;
-
-        }
-        return flag;
-    }
-
-    /**
-     * Del directory boolean.
-     *
-     * @return boolean
-     */
-    public boolean delDirectory() {
-        File delDestination = new File(System.getProperty(userDir) + "\\src\\test\\resources\\downloadFile");
-        if (delDestination.exists()) {
-            File[] files = delDestination.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    delDirectory();
-                } else {
-                    files[i].delete();
-                }
-            }
-        }
-        return delDestination.delete();
     }
 
 }// End class

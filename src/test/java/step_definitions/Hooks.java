@@ -29,7 +29,7 @@ public class Hooks {
     String pathForLogger;
     String screenshotFilePath;
 
-    @Before("@CBA_Testcases")
+    @Before("@CBA_testcases")
     public void beforeMethodAmazon(Scenario scenario) {
 
 //        if (scenario.getName().contains("_"))
@@ -51,7 +51,7 @@ public class Hooks {
                 GlobalUtil.getCommonSettings().getBrowser()));
     }
 
-    //    @Before("@LolRMI1")
+    //    @Before("")
     public void beforeAPIMethod(Scenario scenario) {
 
 //        if (scenario.getName().contains("_"))
@@ -132,8 +132,8 @@ public class Hooks {
 
             } else {
 
-//				RunCukesTest.logger.log(LogStatus.PASS,
-//						HTMLReportUtil.passStringGreenColor(scenario.getName() ));
+				RunCukesTest.logger.log(LogStatus.PASS,
+						HTMLReportUtil.passStringGreenColor(scenario.getName() ));
 
                 LogUtil.infoLog(Hooks.class,
                         "Test has ended closing browser: " + GlobalUtil.getCommonSettings().getBrowser());
@@ -144,7 +144,7 @@ public class Hooks {
         }
     }
 
-    @After("@CBA_Testcases")
+    @After("@CBA_testcases")
     public void afterMethodSmoke(Scenario scenario) {
         String testId;
         if (scenario.getName().contains("_"))
@@ -155,7 +155,7 @@ public class Hooks {
         if (scenario.isFailed()) {
             try {
                 //Taking Screenshot and putting into the report
-               String scFileName = "ScreenShot_" + System.currentTimeMillis();
+                String scFileName = "ScreenShot_" + System.currentTimeMillis();
                 String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
@@ -311,7 +311,7 @@ public class Hooks {
         RunCukesTest.extent.endTest(RunCukesTest.logger);
     }
 
-    //    @After("@firsttestcase1")
+    //    @After("")
     public void afterMobileTestMethod(Scenario scenario) {
         String testName;
 
