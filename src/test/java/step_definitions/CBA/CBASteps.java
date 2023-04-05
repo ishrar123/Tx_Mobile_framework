@@ -19,6 +19,7 @@ import utilities.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class CBASteps extends KeywordUtil {
     public CBASteps() {
         dataMap = BaseStepDefinitions.dataMap;
     }
+    String button3 = "";
+    WebElement button2;
 
     @Given("user is on the application")
     public void user_is_on_the_application() {
@@ -40,27 +43,28 @@ public class CBASteps extends KeywordUtil {
         navigateToUrl("https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota");
     }
 
-    @When("user clicks on the {string} i  button")
-    public void uesr_clicks_on_the_i_button(String i) throws InterruptedException {
+    @When("user clicks on the {string} {string}  button")
+    public void uesr_clicks_on_the_i_button(String servicename, String i) throws InterruptedException {
         // driver.findElement(By.xpath("(//div[@class='landing-services-section-top']/button[@class='info-button']) [2]")).click();
-        isWebElementVisible(CBAPage.i_button(Integer.parseInt(i)));
-        hoverOnElement(CBAPage.i_button(Integer.parseInt(i)));
-        click(CBAPage.i_button(Integer.parseInt(i)), "click on the " + i + " i button");
+        Thread.sleep(7000);
+        isWebElementVisible(CBAPage.i_button(servicename, Integer.parseInt(i)));
+        hoverOnElement(CBAPage.i_button(servicename, Integer.parseInt(i)));
+        click(CBAPage.i_button(servicename, Integer.parseInt(i)), "click on the " + servicename + "  i  button");
     }
 
     @Then("user is able to see an informative page with description of all the car services")
     public void user_is_able_to_see_an_informative_page_with_description_of_all_the_car_services() throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
         Assert.assertTrue(isWebElementVisible(CBAPage.informative_page));
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Informative page is present"));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("An informative page with description of all the car services is present"));
 
     }
 
-    @When("user clicks on the {string} toggle button")
-    public void user_clicks_on_the_toggle_button(String togglebutton) throws InterruptedException {
-        isWebElementVisible(CBAPage.togglebutton(Integer.parseInt(togglebutton)));
-        hoverOnElement(CBAPage.togglebutton(Integer.parseInt(togglebutton)));
-        click(CBAPage.togglebutton(Integer.parseInt(togglebutton)), "click on the " + togglebutton + " button");
+    @When("user clicks on the {string} {string} toggle button")
+    public void user_clicks_on_the_toggle_button(String servicename, String togglebutton) throws InterruptedException {
+        isWebElementVisible(CBAPage.togglebutton(servicename, Integer.parseInt(togglebutton)));
+        hoverOnElement(CBAPage.togglebutton(servicename, Integer.parseInt(togglebutton)));
+        click(CBAPage.togglebutton(servicename, Integer.parseInt(togglebutton)), "Click on the " + servicename + " toggle  button");
 
 
     }
@@ -72,14 +76,14 @@ public class CBASteps extends KeywordUtil {
             System.out.println("services are present");
         } else {
             hoverOnElement(CBAPage.know_more);
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Services are not visible"));
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Something's wrong' options is closed. "));
         }
     }
 
     @Then("user is able to see the services in the something_s wrongs")
     public void user_is_able_to_see_the_services_in_the_something_s_wrongs() throws InterruptedException {
-        List<WebElement> servicesList = getListElements(CBAPage.Something_s_wrong_services, "list of services ");
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the services "));
+        List<WebElement> servicesList = getListElements(CBAPage.Something_s_wrong_services, " able to see the list of services in the Something's wrong");
+
         for (int i = 0; i < servicesList.size(); i++) {
             hoverOnElement(CBAPage.something_wrong_all_Sevices);
             hoverOnElement(CBAPage.know_more);
@@ -91,35 +95,30 @@ public class CBASteps extends KeywordUtil {
 
     @Then("user is able to see the services in the common servicess")
     public void user_is_able_to_see_the_services_in_the_common_servicess() {
-        List<WebElement> servicesList = getListElements(CBAPage.services, "list of services");
+        List<WebElement> servicesList = getListElements(CBAPage.services, " able to see the list of services in the common services");
         for (int i = 0; i < servicesList.size(); i++) {
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(servicesList.get(i).getText()));
 
         }
     }
 
-    @Then("user is able to click on the services")
-    public void user_is_able_to_click_on_the_services() {
-        List<WebElement> servicesList = getListElements(CBAPage.services, "list of services");
-
-    }
-
 
     @Then("user should be able to see the stay and wait button")
     public void user_should_be_able_to_see_the_stay_and_wait_button() {
+
         Assert.assertTrue(isWebElementVisible(CBAPage.stayAndWaitIcon), "stay and wait is present");
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("stay and wait is present"));
 
     }
 
 
-    @And("{string} button should be present")
+    @And("Common services {string} button should be present")
     public void button_should_be_present(String button) throws InterruptedException {
         waitForVisible(CBAPage.common_service_i_button);
         hoverOnElement(CBAPage.common_service_i_button);
 
         Assert.assertTrue(isWebElementVisible(CBAPage.common_service_i_button));
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button + " is present"));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(" Common services " + button + " is present"));
     }
 
     @When("user clicks on the {string} button")
@@ -141,27 +140,14 @@ public class CBASteps extends KeywordUtil {
 
     @And("user click on {string} button")
     public void user_click_on_button(String button) throws InterruptedException {
+        Thread.sleep(6000);
         waitForVisible(CBAPage.buttonPresent(button));
         hoverOnElement(CBAPage.buttonPresent(button));
         click(CBAPage.buttonPresent(button), "Clicking on the " + button + " button ");
 
+
     }
 
-
-    @When("user Click services as Oil Change State Inspection and Tire Rotation")
-    public void user_Click_services_as_Oil_Change_State_Inspection_and_Tire_Rotation() throws InterruptedException {
-        Thread.sleep(5000);
-        click(CBAPage.oil_change_service, "click on the oil service button");
-        click(CBAPage.state_inspection_service, "click on the state inspection service");
-        click(CBAPage.Tire_rotation_service, "click on the tire rotation service");
-    }
-
-    @And("user click on continue button")
-    public void user_click_on_continue_button() throws InterruptedException {
-
-        Thread.sleep(5000);
-        click(CBAPage.Continue, "click on the continue button");
-    }
 
     @And("stay and wait option should be present")
     public void stay_and_wait_option_should_be_present() {
@@ -213,8 +199,8 @@ public class CBASteps extends KeywordUtil {
 
     @Then("{string} services should be activated")
     public void services_should_be_activated(String service) {
-        isWebElementselected(CBAPage.service(service), service + "is selected");
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(service + "is active"));
+        isWebElementselected(CBAPage.service(service), service + " is selected");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(service + " is active"));
     }
 
     @And("all the services in the Something_s wrong is present")
@@ -251,7 +237,7 @@ public class CBASteps extends KeywordUtil {
 
     @And("wait for some time to load the page")
     public void wait_for_some_time_to_load_the_page() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(6000);
     }
 
 
@@ -263,7 +249,10 @@ public class CBASteps extends KeywordUtil {
     }
 
     @Then("user is able to see the selected {string}")
-    public void user_is_able_to_see_the_selected(String timeslot) {
+    public void user_is_able_to_see_the_selected(String timeslot) throws InterruptedException {
+        Thread.sleep(7000);
+        isWebElementVisible(CBAPage.selecttimeslot(timeslot));
+        hoverOnElement(CBAPage.selecttimeslot(timeslot));
         isWebElementselected(CBAPage.selecttimeslot(timeslot), timeslot + "is selected ");
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + timeslot));
 
@@ -278,11 +267,19 @@ public class CBASteps extends KeywordUtil {
 
     @Then("user is able to see the monthyear")
     public void user_is_able_to_see_the_monthyear() {
+        LocalDate currentdate = LocalDate.now();
+
+        Month currentMonth = currentdate.getMonth();
+        System.out.println("Current month: "+currentMonth);
+        //getting the current year
+        int currentYear = currentdate.getYear();
+        System.out.println("Current Year: "+currentYear);
+        String currentMonth_currentyear=currentMonth +" "+ currentYear;
         isWebElementVisible(CBAPage.current_month);
         String text = getElementTextWithFindElement(CBAPage.current_month);
         System.out.println(text);
-        Assert.assertEquals(text, "MARCH 2023");
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(text + "is present"));
+        Assert.assertEquals(text, currentMonth_currentyear);
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(text + " is present"));
 
     }
 
@@ -605,7 +602,7 @@ public class CBASteps extends KeywordUtil {
 
     @Then("user is able to see the next 7 dates")
     public void user_is_able_to_view_the_next_7_dates() {
-        List<WebElement> all_dates = getListElements(CBAPage.date, "getting all the list");
+        List<WebElement> all_dates = getListElements(CBAPage.date, "getting next 7 dates");
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(String.valueOf(all_dates.size())));
         for (int i = 0; i < all_dates.size(); i++) {
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(all_dates.get(i).getText()));
@@ -632,7 +629,7 @@ public class CBASteps extends KeywordUtil {
         if (isWebElementVisible(CBAPage.common_service_all_service)) {
             System.out.println("services are present");
         } else {
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Services are not visible"));
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Common services options is  closed. "));
         }
     }
 
@@ -645,7 +642,7 @@ public class CBASteps extends KeywordUtil {
 
     @Then("Informative page closes.")
     public void informativePageCloses() {
-        Assert.assertTrue(isWebElementVisible(CBAPage.informative_page));
+        Assert.assertTrue(isWebElementNotPresent(CBAPage.informative_page));
     }
 
     @And("user is able to see all the tools")
@@ -666,28 +663,38 @@ public class CBASteps extends KeywordUtil {
     }
 
 
-    @And("user select the the {string} timeslot")
-    public void user_select_the_the_timeslot(String timeslot) throws InterruptedException {
+    @And("user select the the available timeslot")
+    public void user_select_the_the_timeslot() throws InterruptedException {
+
         List<WebElement> timeslots = getListElements(CBAPage.time_slots, "the time slot are : ");
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("the user selected " + timeslot));
-//        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("the enabled time slots are:"));
         for (int i = 0; i < timeslots.size(); i++) {
+            button2 = timeslots.get(i);
 
+            if (button2.isEnabled()) {
 
-            Boolean ennabledtimeslots = timeslots.get(i).isEnabled();
+                button3 = button2.getText();
+                button2.click();
 
-
-            if (ennabledtimeslots == true) {
-
-
-                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(timeslots.get(i).getText()));
-                waitForVisible(CBAPage.selecttimeslot(timeslot));
-                hoverOnElement(CBAPage.selecttimeslot(timeslot));
-                click(CBAPage.selecttimeslot(timeslot), timeslot + "is selected");
+                Thread.sleep(7000);
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button3 + " is selected"));
                 break;
-
-
             }
+
+
+//            Boolean ennabledtimeslots = timeslots.get(i).isEnabled();
+//
+//
+//            if (ennabledtimeslots == true) {
+//
+//
+//                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(timeslots.get(i).getText()));
+//                waitForVisible(CBAPage.selecttimeslot(timeslot));
+//                hoverOnElement(CBAPage.selecttimeslot(timeslot));
+//                click(CBAPage.selecttimeslot(timeslot), timeslot + "is selected");
+//                break;
+//
+//
+//            }
 
 
         }
@@ -715,6 +722,8 @@ public class CBASteps extends KeywordUtil {
                 click(CBAPage.select_year(year1), "select the year");
 
             }
+
+
         }
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(year1 + " is selected"));
 
@@ -920,14 +929,17 @@ public class CBASteps extends KeywordUtil {
     @And("user able to select date and time and click on {string} button")
     public void user_able_to_select_date_and_time_and_click_on_continue_button(String button) throws InterruptedException {
 
+
         List<WebElement> servicesList = getListElements(CBAPage.slots, "list of services");
         for (int i = 0; i < servicesList.size(); i++) {
             System.out.println(servicesList.get(i).getText());
             WebElement button2 = servicesList.get(i);
             String button3 = button2.getText();
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button3));
+
             if (button2.isEnabled()) {
                 button2.click();
-                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button2 + "is selected"));
+                //RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button2 + "is selected"));
                 break;
             }
 
@@ -945,9 +957,7 @@ public class CBASteps extends KeywordUtil {
         Thread.sleep(5000);
         //Assert.assertTrue(isWebElementVisible(CBAPage.selectavailbleslot(button3)));
         click(CBAPage.buttonPresent(button), "Clicking on the " + button + " button ");
-
     }
-
 
     @And("user navigates on the {string} button and validates next day page")
     public void user_navigates_on_the_button_next_day(String button) throws InterruptedException {
@@ -960,13 +970,13 @@ public class CBASteps extends KeywordUtil {
         LocalDate today = LocalDate.now();
         String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
         System.out.print("Tomarrow date: " + tomorrow);
-        String str2 = tomorrow.substring(8, 10);
+        String str2 = tomorrow.substring(9, 10);
         System.out.print("tomarrow date: " + str2);
 
         isWebElementVisible(CBAPage.current_date);
         String text = getElementTextWithFindElement(CBAPage.current_date);
         System.out.println("Here: " + text);
-        String text2 = text.substring(4, 6);
+        String text2 = text.substring(4, 5);
         System.out.println("Here2: " + text2);
         Assert.assertEquals(str2, text2);
     }
@@ -980,7 +990,7 @@ public class CBASteps extends KeywordUtil {
         LocalDate today = LocalDate.now();
         String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
         System.out.print("Tomarrow date: " + tomorrow);
-        String str2 = tomorrow.substring(8, 10);
+        String str2 = tomorrow.substring(9, 10);
         System.out.print("tomarrow date: " + str2);
         click(CBAPage.selectingthenextdaydate(str2), str2 + "is selected");
         Thread.sleep(6000);
@@ -1013,7 +1023,7 @@ public class CBASteps extends KeywordUtil {
         LocalDate today = LocalDate.now();
         String yesterday = (today.minusDays(1)).format(DateTimeFormatter.ISO_DATE);
         System.out.print("Yesterday date: " + yesterday);
-        String str2 = yesterday.substring(8, 10);
+        String str2 = yesterday.substring(9, 10);
         System.out.print("yesterday date: " + str2);
 
         click(CBAPage.selectingthenextdaydate(str2), str2 + "is selected");
@@ -1084,10 +1094,13 @@ public class CBASteps extends KeywordUtil {
                 isWebElementVisible(CBAPage.select_make(make));
                 hoverOnElement(CBAPage.select_make(make));
                 click(CBAPage.select_make(make), "select the make");
+
+
             }
+
+
         }
-        Assert.assertTrue(isWebElementVisible(CBAPage.model));
-        Assert.assertTrue(isWebElementVisible(CBAPage.color_disable));
+        Assert.assertTrue(isWebElementVisible(CBAPage.make));
 
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(make + "  is selected"));
 
@@ -1133,7 +1146,7 @@ public class CBASteps extends KeywordUtil {
     }
 
     @Then("see their additional notes in the first sectioned area")
-    public void see() {
+    public void see_their_additional_notes_in_the_first_sectioned_area() {
         isWebElementVisible(CBAPage.review_other_text);
         String Expected_text = getElementTextWithFindElement(CBAPage.review_other_text);
         Assert.assertEquals(Expected_text, "my vehicle name is Appache");
@@ -1143,18 +1156,38 @@ public class CBASteps extends KeywordUtil {
     }
 
     @Then("user click on the i button in the review screen")
-    public void user(){
+    public void user_click_on_the_i_button_in_the_review_screen() {
         isWebElementVisible(CBAPage.dropicon_i_button);
         click(CBAPage.dropicon_i_button, "click on the i button");
     }
 
     @Then("user is able to see the after model")
-    public void user_is() {
+    public void user_is_able_to_see_the_after_model() {
         Assert.assertTrue(isWebElementVisible(CBAPage.afterHoursModal));
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the after model "));
     }
+
+    @Then("user sees their Drop off or Sit and Wait service in the first sectioned area")
+    public void userSeesTheirDropOffOrSitAndWaitServiceInTheFirstSectionedArea() {
+        isWebElementVisible(CBAPage.spec_service);
+        String service_sel = getElementTextWithFindElement(CBAPage.spec_service);
+        System.out.println("Getting text " + service_sel);
+        Assert.assertEquals(service_sel, "Dropoff: Please note we will begin service at our first available opportunity after dropoff.");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + service_sel + " in the first sectioned area"));
+
+    }
+
+    @Then("user is able to see the available timeslot")
+    public void able_to_see_the_selected_timeslot() throws InterruptedException {
+
+        Assert.assertTrue(isWebElementEnable(CBAPage.selecttimeslot(button3), button3 + " timezone is selected"));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button3 + " timezone is selected"));
+
+
+    }
+
     @And("user validating the year drop down list")
-    public void user_validating_the_year_drop_down_list () throws InterruptedException {
+    public void user_validating_the_year_drop_down_list() throws InterruptedException {
         List<WebElement> yearList = getListElements(CBAPage.dropdown, "list of years ");
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the years "));
         for (int i = 0; i < yearList.size(); i++) {
@@ -1208,36 +1241,355 @@ public class CBASteps extends KeywordUtil {
 
         Thread.sleep(5000);
 
+
     }
 
-    @Then("user is able to see the continue button is in disable state un till select year")
-    public void user_is_able_to_see_the_continue_button_is_in_disable_state_un_till_select_year()  {
+    @And("user validating makes drop down list")
+    public void user_validating_makes_drop_down_list() {
+        List<WebElement> makeList = getListElements(CBAPage.make_list, "list of make brands");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see make brands"));
+        for (int i = 0; i < makeList.size(); i++) {
+            System.out.println(makeList.get(i).getText());
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(makeList.get(i).getText()));
 
-        CBAPage.buttonPresentDisabled("Continue");
+        }
+        Assert.assertEquals(makeList.get(0).getText(), "Acura");
+        Assert.assertEquals(makeList.get(1).getText(), "Alfa Romeo");
+        Assert.assertEquals(makeList.get(2).getText(), "Aston Martin");
+        Assert.assertEquals(makeList.get(3).getText(), "Audi");
+        Assert.assertEquals(makeList.get(4).getText(), "BAIC");
+        Assert.assertEquals(makeList.get(5).getText(), "Bentley");
+        Assert.assertEquals(makeList.get(6).getText(), "BMW");
+        Assert.assertEquals(makeList.get(7).getText(), "Bugatti");
+        Assert.assertEquals(makeList.get(8).getText(), "Buick");
+        Assert.assertEquals(makeList.get(9).getText(), "Cadillac");
+        Assert.assertEquals(makeList.get(10).getText(), "Chevrolet");
+        Assert.assertEquals(makeList.get(11).getText(), "Chrysler");
+        Assert.assertEquals(makeList.get(12).getText(), "Cupra");
+        Assert.assertEquals(makeList.get(13).getText(), "Dodge");
+        Assert.assertEquals(makeList.get(14).getText(), "Ferrari");
+        Assert.assertEquals(makeList.get(15).getText(), "Fiat");
+        Assert.assertEquals(makeList.get(16).getText(), "Ford");
+        Assert.assertEquals(makeList.get(17).getText(), "Freightliner");
+        Assert.assertEquals(makeList.get(18).getText(), "Genesis");
+        Assert.assertEquals(makeList.get(19).getText(), "GMC");
+        Assert.assertEquals(makeList.get(20).getText(), "Honda");
+        Assert.assertEquals(makeList.get(21).getText(), "Hyundai");
+        Assert.assertEquals(makeList.get(22).getText(), "INFINITI");
+        Assert.assertEquals(makeList.get(23).getText(), "Isuzu");
+        Assert.assertEquals(makeList.get(24).getText(), "JAC");
+        Assert.assertEquals(makeList.get(25).getText(), "Jaguar");
+        Assert.assertEquals(makeList.get(26).getText(), "Jeep");
+        Assert.assertEquals(makeList.get(27).getText(), "JMC");
+        Assert.assertEquals(makeList.get(28).getText(), "Karma");
+        Assert.assertEquals(makeList.get(29).getText(), "Kia");
+        Assert.assertEquals(makeList.get(30).getText(), "Lamborghini");
+        Assert.assertEquals(makeList.get(31).getText(), "Land Rover");
+        Assert.assertEquals(makeList.get(32).getText(), "Lexus");
+        Assert.assertEquals(makeList.get(33).getText(), "Lincoln");
+        Assert.assertEquals(makeList.get(34).getText(), "Lotus");
+        Assert.assertEquals(makeList.get(35).getText(), "Maserati");
+        Assert.assertEquals(makeList.get(36).getText(), "Mazda");
+        Assert.assertEquals(makeList.get(37).getText(), "McLaren");
+        Assert.assertEquals(makeList.get(38).getText(), "Mercedes-Benz");
+        Assert.assertEquals(makeList.get(39).getText(), "MG");
+        Assert.assertEquals(makeList.get(40).getText(), "Mini");
+        Assert.assertEquals(makeList.get(41).getText(), "Mitsubishi");
+        Assert.assertEquals(makeList.get(42).getText(), "Nissan");
+        Assert.assertEquals(makeList.get(43).getText(), "Peugeot");
+        Assert.assertEquals(makeList.get(44).getText(), "Polestar");
+        Assert.assertEquals(makeList.get(45).getText(), "Porsche");
+        Assert.assertEquals(makeList.get(46).getText(), "Ram");
+        Assert.assertEquals(makeList.get(47).getText(), "Renault");
+        Assert.assertEquals(makeList.get(48).getText(), "Rolls-Royce");
+        Assert.assertEquals(makeList.get(49).getText(), "Seat");
+        Assert.assertEquals(makeList.get(50).getText(), "Subaru");
+        Assert.assertEquals(makeList.get(51).getText(), "Suzuki");
+        Assert.assertEquals(makeList.get(52).getText(), "Tesla");
+        Assert.assertEquals(makeList.get(53).getText(), "Toyota");
+        Assert.assertEquals(makeList.get(54).getText(), "Volkswagen");
+        Assert.assertEquals(makeList.get(55).getText(), "Volvo");
+        Assert.assertEquals(makeList.get(56).getText(), "Zacua");
+
+
+    }
+
+    @Then("user click on  {string} Edit button in {string} area")
+    public void edit_button(String i, String area) throws InterruptedException {
+        isWebElementVisible(CBAPage.edit_button(Integer.parseInt(i), area));
+        hoverOnElement(CBAPage.edit_button(Integer.parseInt(i), area));
+        click(CBAPage.edit_button(Integer.parseInt(i), area), "user click on the edit button in the " + area);
+    }
+
+    @Then("user is able to see the chosen location's name as {string}, address as {string}, and phone number as {string} in the third sectioned area.")
+    public void details_in_third_sectioned_area(String location, String address, String phone) {
+        String expected_location = getElementTextWithFindElement(CBAPage.review_page(location));
+        Assert.assertEquals(expected_location, location);
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + expected_location + " in the third sectioned area"));
+        String expeted_address = getElementTextWithFindElement(CBAPage.review_page(address));
+        Assert.assertEquals(expeted_address, address);
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + expeted_address + " in the third sectioned area"));
+        String expected_phone_number = getElementTextWithFindElement(CBAPage.phone_number);
+        Assert.assertEquals(phone, expected_phone_number);
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + expected_phone_number + " in the third sectioned area"));
+
+    }
+
+    @Then("user see the {string} button is disabled")
+    public void disabled_continue(String button) throws InterruptedException {
+        isWebElementVisible(CBAPage.buttonPresentDisabled(button));
+        hoverOnElement(CBAPage.buttonPresentDisabled(button));
+        CBAPage.buttonPresentDisabled(button);
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button + " button  is disbled "));
+    }
+
+    @Then("{string} button is Enabled")
+    public void continue_button_disabled(String button) {
+        Assert.assertTrue(isWebElementEnable(CBAPage.buttonPresent(button), button + " is enabled "));
+    }
+
+    @And("user select the the {string} timeslot")
+    public void select_timeslot(String timeslot) throws InterruptedException {
+        Thread.sleep(7000);
+        isWebElementVisible(CBAPage.selecttimeslot(timeslot));
+        hoverOnElement(CBAPage.selecttimeslot(timeslot));
+        click(CBAPage.selecttimeslot(timeslot), "click on " + timeslot);
+    }
+
+    @And("user verifying {string}")
+    public void user_selects_in(String service) throws InterruptedException {
+        waitForVisible(CBAPage.service(service));
+        hoverOnElement(CBAPage.service(service));
+        Assert.assertTrue(isWebElementVisible(CBAPage.service(service)));
+        Assert.assertTrue(isWebElementVisible(CBAPage.serviceSelected(service)));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(service + " is selected"));
+
+    }
+
+    @Then("shuttle service option should be disabled")
+    public void shuttleServiceOptionShouldBeDisabled() throws InterruptedException {
+        hoverOnElement(CBAPage.hover_shuttle);
+
+        boolean element_disbale = isWebElementEnable(CBAPage.Shuttle_service_button, "Checking the Shuttle service radio button");
+        if (element_disbale) {
+
+            RunCukesTest.logger.log(LogStatus.FAIL, HTMLReportUtil.failStringRedColor("Shuttle service radio button is enabled."));
+        } else {
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Shuttle service radio button is disabled."));
+        }
+    }
+
+
+    @And("user able to select_available date")
+    public void user_able_to_select_available_date() throws InterruptedException {
+
+        List<WebElement> listofdates = getListElements(CBAPage.dates, "list of available dates");
+        for (int i = 0; i < listofdates.size(); i++) {
+            System.out.println(listofdates.get(i).getText());
+            WebElement button2 = listofdates.get(i);
+            if (button2.isEnabled()) {
+                String button4 = button2.getText();
+                System.out.println("here is availble one" + button4);
+                button2.click();
+                delay(2000);
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button4 + " is selected"));
+                break;
+            }
+        }
+    }
+
+    @And("user verifying available_time slot_for_that_date")
+    public void user_verifying_available_time_slot_for_that_date() throws InterruptedException {
+
+        List<WebElement> listofslots = getListElements(CBAPage.slots, "list of available slots");
+        for (int i = 0; i < listofslots.size(); i++) {
+            System.out.println(listofslots.get(i).getText());
+            WebElement button2 = listofslots.get(i);
+            if (button2.isEnabled()) {
+                String button5 = button2.getText();
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button5 + " is a available time slot"));
+                delay(2000);
+                break;
+            }
+        }
+    }
+
+    @And("user able to select available_time")
+    public void user_able_to_select_available_time() throws InterruptedException {
+
+        List<WebElement> listofslots = getListElements(CBAPage.slots, "list of available slots");
+        for (int i = 0; i < listofslots.size(); i++) {
+            System.out.println(listofslots.get(i).getText());
+            WebElement button2 = listofslots.get(i);
+            if (button2.isEnabled()) {
+                button3 = button2.getText();
+                button2.click();
+                delay(2000);
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button2 + "is selected"));
+                break;
+            }
+        }
+    }
+
+    @And("user validating the selected date")
+    public void user_validating_the_selected_date() throws InterruptedException {
+
+        Assert.assertTrue(isWebElementVisible(CBAPage.nextday));
+        Assert.assertTrue(isWebElementEnable(CBAPage.selectavailbleslot(button3), button3 + "is selected"));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(button3 + "is selected"));
+    }
+
+    @Then("User validating calender view page")
+    public void user_validating_calender_view_page() throws InterruptedException {
+        delay(3000);
+        Assert.assertEquals("Su", getElementTextWithFindElement(CBAPage.calender_sun_day), "validating SunDay");
+        Assert.assertEquals("Mo", getElementTextWithFindElement(CBAPage.calender_mon_day), "validating MonDay");
+        Assert.assertEquals("Tu", getElementTextWithFindElement(CBAPage.calender_tue_day), "validating TueDay");
+        Assert.assertEquals("We", getElementTextWithFindElement(CBAPage.calender_wed_day), "validating Wednesday");
+        Assert.assertEquals("Th", getElementTextWithFindElement(CBAPage.calender_thu_day), "validating ThursDay");
+        Assert.assertEquals("Fr", getElementTextWithFindElement(CBAPage.calender_fri_day), "validating FriDay");
+        Assert.assertEquals("Sa", getElementTextWithFindElement(CBAPage.calender_sat_day), "validating SatDay");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("validating calender view"));
+    }
+
+    @Then("User validating week view page")
+    public void user_validating_week_view_page() throws InterruptedException {
+        delay(3000);
+        Assert.assertEquals("SUN", getElementTextWithFindElement(CBAPage.sun_day), "validating SunDay");
+        Assert.assertEquals("MON", getElementTextWithFindElement(CBAPage.mon_day), "validating MonDay");
+        Assert.assertEquals("TUE", getElementTextWithFindElement(CBAPage.tue_day), "validating TueDay");
+        Assert.assertEquals("WED", getElementTextWithFindElement(CBAPage.wed_day), "validating Wednesday");
+        Assert.assertEquals("THU", getElementTextWithFindElement(CBAPage.thu_day), "validating ThursDay");
+        Assert.assertEquals("FRI", getElementTextWithFindElement(CBAPage.fri_day), "validating FriDay");
+        Assert.assertEquals("SAT", getElementTextWithFindElement(CBAPage.sat_day), "validating SatDay");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("validating week view"));
+    }
+
+    @And("user verifying stepper mark")
+    public void user_verifying_stepper_mark() throws InterruptedException {
+
+        Assert.assertTrue(isWebElementVisible(CBAPage.checked_icon));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is verifying the stepper mark in personal info page"));
 
     }
 
     @Then("user is able to see the continue button")
-    public void user_is_able_to_see_the_continue_button()  {
+    public void user_is_able_to_see_the_continue_button() {
 
         Assert.assertTrue(isWebElementVisible(CBAPage.buttonPresent("Continue")));
     }
 
     @Then("user is able to see the previous button")
-    public void user_is_able_to_see_the_previous_button()  {
+    public void user_is_able_to_see_the_previous_button() {
 
         Assert.assertTrue(isWebElementVisible(CBAPage.buttonPresent("Previous")));
 
     }
 
-    @Then("user sees their Drop off or Sit and Wait service in the first sectioned area")
-    public void userSeesTheirDropOffOrSitAndWaitServiceInTheFirstSectionedArea() {
-        isWebElementVisible(CBAPage.spec_service);
-        String service_sel = getElementTextWithFindElement(CBAPage.spec_service);
-        System.out.println("Getting text " + service_sel);
-        Assert.assertEquals(service_sel, "Dropoff: Please note we will begin service at our first available opportunity after dropoff.");
-        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the " + service_sel + " in the first sectioned area"));
+    @Then("user is able to see the continue button is in disable state un till select year")
+    public void user_is_able_to_see_the_continue_button_is_in_disable_state_un_till_select_year() {
 
+        CBAPage.buttonPresentDisabled("Continue");
+
+    }
+
+    @And("user validating  model list drop down")
+    public void user_able_to_see_the_model_drop_down() {
+        List<WebElement> modelList = getListElements(CBAPage.model_list, "list of models ");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the models "));
+        for (int i = 0; i < modelList.size(); i++) {
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(modelList.get(i).getText()));
+
+        }
+        Assert.assertEquals(modelList.get(0).getText(), "ILX");
+        Assert.assertEquals(modelList.get(1).getText(), "NSX");
+        Assert.assertEquals(modelList.get(2).getText(), "RDX");
+        Assert.assertEquals(modelList.get(3).getText(), "TLX");
+
+
+    }
+
+    @When("user clicks on the color dropdown")
+    public void user_clicks_on_the_color_button() throws InterruptedException {
+        isWebElementVisible(CBAPage.color);
+        hoverOnElement(CBAPage.color);
+        click(CBAPage.color, "click on the color dropdown");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("color dropdown is clicked"));
+
+    }
+
+    @And("user validating  color list drop down")
+    public void user_able_to_see_the_color_drop_down() {
+        List<WebElement> colorlist = getListElements(CBAPage.color_list, "list of colours ");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user is able to see the colours "));
+        for (int i = 0; i < colorlist.size(); i++) {
+            System.out.println(colorlist.get(i).getText());
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(colorlist.get(i).getText()));
+
+        }
+        Assert.assertEquals(colorlist.get(0).getText(), "Beige");
+        Assert.assertEquals(colorlist.get(1).getText(), "Black");
+        Assert.assertEquals(colorlist.get(2).getText(), "Blue");
+        Assert.assertEquals(colorlist.get(3).getText(), "Brown");
+        Assert.assertEquals(colorlist.get(4).getText(), "Gold");
+        Assert.assertEquals(colorlist.get(5).getText(), "Grey");
+        Assert.assertEquals(colorlist.get(6).getText(), "Green");
+        Assert.assertEquals(colorlist.get(7).getText(), "Maroon");
+        Assert.assertEquals(colorlist.get(8).getText(), "Orange");
+        Assert.assertEquals(colorlist.get(9).getText(), "Purple");
+        Assert.assertEquals(colorlist.get(10).getText(), "Red");
+
+        Assert.assertEquals(colorlist.get(11).getText(), "Silver");
+        Assert.assertEquals(colorlist.get(12).getText(), "White");
+        Assert.assertEquals(colorlist.get(13).getText(), "Yellow");
+        Assert.assertEquals(colorlist.get(14).getText(), "Other");
+
+
+    }
+
+    @When("user selects the {string} color")
+    public void user_selects_the_color(String color) throws InterruptedException {
+        List<WebElement> color_list = getListElements(CBAPage.color_list, "getting the list");
+        for (int i = 0; i < color_list.size(); i++) {
+//            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(model_list.get(i).getText()));
+            if (color_list.get(i).getText().contains(color)) {
+                isWebElementVisible(CBAPage.select_color(color));
+                hoverOnElement(CBAPage.select_color(color));
+                click(CBAPage.select_color(color), "select the color");
+
+            }
+
+
+        }
+
+
+    }
+
+    @Then("User validating personal info page")
+    public void user_validating_personal_info_page() throws InterruptedException {
+        delay(3000);
+        Assert.assertEquals("Almost there! Just need a little more info about you.",getElementTextWithFindElement(CBAPage.personal_info_welcome_message), "validating text");
+        Assert.assertTrue(isWebElementVisible(CBAPage.personal_info_first_name));
+        Assert.assertTrue(isWebElementVisible(CBAPage.personal_info_last_name));
+        Assert.assertTrue(isWebElementVisible(CBAPage.personal_info_email));
+        Assert.assertTrue(isWebElementVisible(CBAPage.personal_info_zipcode));
+
+        Assert.assertEquals("Is this your first time visiting our South Sarasota store?*",getElementTextWithFindElement(CBAPage.personal_info_is_this_your_text), "validating text");
+
+    }
+
+    @Then("user is able to validating make button un availability")
+    public void user_is_able_to_validating_make_button_un_availability() throws InterruptedException {
+
+        Assert.assertTrue(isWebElementVisible(CBAPage.make_disable));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("validating make button un availability"));
+    }
+
+    @Then("user is able to validating make button availability")
+    public void user_is_able_to_validating_make_button_availability() throws InterruptedException {
+
+        Assert.assertTrue(isWebElementVisible(CBAPage.make));
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("validating make button availability"));
     }
 }
 

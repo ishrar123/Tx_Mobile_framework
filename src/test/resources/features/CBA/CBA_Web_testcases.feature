@@ -6,14 +6,14 @@ Feature: CBA Application
 
   @CBA_02 @CBA
   Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
-    When user clicks on the "2" i  button
+    When user clicks on the "Something's Wrong" "2"  button
     Then user is able to see an informative page with description of all the car services
 
   @CBA_03 @CBA
   Scenario: 145_Verify functionality of toggle arrow button in Common Services
-    When user clicks on the "1" toggle button
+    When user clicks on the "Common Services" "1" toggle button
     Then user is not able to see the services in common services
-    When user clicks on the "1" toggle button
+    When user clicks on the "Common Services" "1" toggle button
     Then user is able to see the services in the common servicess
 
   @CBA_04 @CBA
@@ -24,9 +24,9 @@ Feature: CBA Application
 
   @CBA_05 @CBA
   Scenario: 147_Verify functionality of toggle arrow button in 'Something's wrong'.
-    When user clicks on the "2" toggle button
+    When user clicks on the "Something's Wrong" "2" toggle button
     Then user is not able to see the services in something wrong
-    When user clicks on the "2" toggle button
+    When user clicks on the "Something's Wrong" "2" toggle button
     Then user is able to see the services in the something_s wrongs
 
   @CBA_100 @CBA
@@ -136,7 +136,7 @@ Feature: CBA Application
     And user is navigated to "date-time" screen
     And click on calender view
 
-  @CBA_115 @CBA
+  @CBA_115 @CBA1
   Scenario: 159_Verify the user can select a day on the calendar and it will return available times for that date
 
     When  user selects "Alignment" in "services"
@@ -144,7 +144,8 @@ Feature: CBA Application
     Then "Drop and vehicle" button is already selected
     And user click on "Continue" button
     And user click on the "Calender View" button
-    And user is able to see the selected date and verifying the page
+    And user able to select_available date
+    And user verifying available_time slot_for_that_date
 
   @CBA_116 @CBA
   Scenario: 160_Verify if the user has selected a time slot in the week view then tap "Calendar view", the date and time selected in week view are highlighted and displayed in the calendar view
@@ -153,7 +154,10 @@ Feature: CBA Application
     And user click on "Continue" button
     Then "Drop and vehicle" button is already selected
     And user click on "Continue" button
-    And user able to select date and time and click on "Continue" button
+    And user able to select available_time
+    And user click on the "Calender View" button
+    And user validating the selected date
+
 
   @CBA_117 @CBA
   Scenario:161_Verify tapping "Week view" takes the user back to the current weeks view
@@ -163,9 +167,10 @@ Feature: CBA Application
     Then "Drop and vehicle" button is already selected
     And user click on "Continue" button
     And user click on the "Calender View" button
-    Then user is able to see the monthyear
+    Then User validating calender view page
     And user navigates on the "Week view" button
-    Then user is able to see the current week and shows starting days of week
+    Then User validating week view page
+
 
   @CBA_118 @CBA
   Scenario:162_Verify the user can tap "Next day" to view the time slots for the following day
@@ -254,7 +259,7 @@ Feature: CBA Application
     And user validating the year drop down list
     When user selects the "2021" year and verifies page
 
-  @CBA_132  @CBA
+  @CBA_132  @CBA1
   Scenario:170_Verify user can tap on the "Make" field to choose any make from the dropdown once the year has been selected
 
     When  user selects "Alignment" in "services"
@@ -354,452 +359,455 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user is able to see error message "Please enter a 10 digit phone number"
 
-#  @CBA_152
-#  Scenario: CBA_152_Verify the "Zip code" field is present and required
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And "zip" is present
-#    And user click on "Continue" button
-#    Then user is able to see error message "Please enter a valid zip code"
-#
-#  @CBA_153
-#  Scenario: CBA_153_Verify the "Last name" field is present and required
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And "altPhone" is present
-#    And user click on "Continue" button
-#    Then user is not  able to see error message
-#
-#  @CBA_154
-#  Scenario: CBA_154_Verify the text "Is this your first time visiting our South Sarasota store?*" radio button is present and required
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And Location question is present
-#    And user click on "Continue" button
-#    Then user is able to see error message "Please choose Yes or No"
-#
-#  @CBA_155
-#  Scenario: CBA_155_Verify the presence of the "Yes" and "No" radio buttons
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And radio buttons are present
-#
-#
-#  @CBA_157
-#  Scenario: CBA_157_Verify if the user attempts to press the "Continue" button without the required fields filled out, inline errors are shown
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And user click on "Continue" button
-#    Then user is able to see the inline error messages
-#
-#  @CBA_163
-#  Scenario: CBA_163_Verify if the user enters an invalid email address format the inline error is displayed
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And user enters an invalid "email" "ishrar134gmail.com"
-#    Then user is able to see error message "Please enter a valid email address"
-#
-#  @CBA_166
-#  Scenario: CBA_166_Verify if the user enters an invalid email address format the inline error is displayed
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And user enters an invalid "phone" "7879888"
-#    Then user is able to see error message "Please enter a 10 digit phone number"
-#
-#  @CBA_17
-#  Scenario: CBA_17_Verify the "I" option present along common services and the functionality
-#    And "i" button should be present
-#    When user clicks on the "i" button
-#    Then user is able to see the list of all the services
-#
-#  @CBA_170
-#  Scenario: CBA_170_Verify the "Alt. phone number" is capped at 10 digits
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    And user enters an invalid "altPhone" "123456789012"
-#    Then getting the value of "altPhone"
-##            Then user is able to see error message "Please enter a 10 digit phone number"
-#
-#  @CBA_176
-#  Scenario: CBA_176_Verify tapping the "Previous" button will take the user to the Vehicle Info screen
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    Then click on "Previous" button
-#    Then user is navigated to "vehicle-info" screen
-#    Then user is able to see the "2021" year "Acura" make and "ILX" model
-#
-#  @CBA_177
-#  Scenario: CBA_177_Verify tapping the "Continue" button on the vehicle info screen brings the user to the personal information screen with information preserved
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    Then click on "Previous" button
-#    And user click on "Continue" button
-#    Then user is navigated to "personal-info" screen
-#
-#  @CBA_179
-#  Scenario: CBA_179_Verify tapping the "Continue" button on the vehicle info screen brings the user to the personal information screen with information preserved
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then verify that stepper icon is highlighted
-#
-#  @CBA_181
-#  Scenario: Verify the user sees their selected service(s) in the first sectioned area
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then user sees their selected service in the first sectioned area
-#
-#  @CBA_182
-#  Scenario: Verify the user sees their specified drop off/SAW method the selected services in the first sectioned area
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "1:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then user sees their Drop off or Sit and Wait service in the first sectioned area
-#
-#  @CBA_183
-#  Scenario:Verify if the user has chosen an after hours time slot, the "i" icon is present to the right of the appointment type
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "After Hours" timeslot
-#    And user is able to click on the done button
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then user is able to see the i button in the review page
-#
-#  @CBA_184
-#  Scenario: Verify if the user clicks the "i" icon, the after hours modal appears
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "After Hours" timeslot
-#    And user is able to click on the done button
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then user click on the i button in the review screen
-#    Then user is able to see the after model
-#
-#  @CBA_185
-#  Scenario:Verify if the user has chosen an after hours time slot, the "i" icon is present to the right of the appointment type
-#    When  user selects "Other" in "services"
-#    And user add "my vehicle name is Appache"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "5:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then see their additional notes in the first sectioned area
-#
-#  @CBA_187
-#  Scenario:Verify if the user has chosen an after hours time slot, the "i" icon is present to the right of the appointment type
-#    When  user selects "Other" in "services"
-#    And user add "my vehicle name is Appache"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "5:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    And user click on "Edit" button
-#    Then user is navigated to "https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota/" screen
-#
-#  @CBA_19
-#  Scenario: CBA_19_Verify "Stay and Wait" functionality
+  @CBA_152 @CBA1
+  Scenario: 175_Verify the "Zip code" field is present and required
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And "zip" is present
+    And user click on "Continue" button
+    Then user is able to see error message "Please enter a valid zip code"
+
+  @CBA_153 @CBA1
+  Scenario: 176_Verify the "Last name" field is present and required
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And "altPhone" is present
+    And user click on "Continue" button
+    Then user is not  able to see error message
+
+  @CBA_154 @CBA1
+  Scenario: 177_Verify the text "Is this your first time visiting our South Sarasota store?*" radio button is present and required
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And Location question is present
+    And user click on "Continue" button
+    Then user is able to see error message "Please choose Yes or No"
+
+  @CBA_155 @CBA1
+  Scenario: 178_Verify the presence of the "Yes" and "No" radio buttons
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And radio buttons are present
+
+
+  @CBA_157  @CBA1
+  Scenario: 179_Verify if the user attempts to press the "Continue" button without the required fields filled out, inline errors are shown
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And user click on "Continue" button
+    Then user is able to see the inline error messages
+
+  @CBA_163 @CBA1
+  Scenario: 180_Verify if the user enters an invalid email address format the inline error is displayed
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And user enters an invalid "email" "ishrar134gmail.com"
+    Then user is able to see error message "Please enter a valid email address"
+
+  @CBA_166 @CBA1
+  Scenario: 181_Verify if the user enters an invalid phone number format the inline error is displayed
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And user enters an invalid "phone" "7879888"
+    Then user is able to see error message "Please enter a 10 digit phone number"
+
+  @CBA_17 @CBA1
+  Scenario: 182_Verify the "I" option present along common services and the functionality
+    And  Common services "i" button should be present
+    When user clicks on the "Common Services" "1"  button
+    Then user is able to see an informative page with description of all the car services
+
+  @CBA_170 @CBA1
+  Scenario: 183_Verify the "Alt. phone number" is capped at 10 digits
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    And user enters an invalid "altPhone" "123456789012"
+    Then getting the value of "altPhone"
+#            Then user is able to see error message "Please enter a 10 digit phone number"
+
+  @CBA_176 @CBA1
+  Scenario: 184_Verify tapping the "Previous" button will take the user to the Vehicle Info screen
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    Then click on "Previous" button
+    Then user is navigated to "vehicle-info" screen
+    Then user is able to see the "2021" year "Acura" make and "ILX" model
+
+  @CBA_177
+  Scenario: 194_Verify tapping the "Continue" button on the vehicle info screen brings the user to the personal information screen with information preserved
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    Then click on "Previous" button
+    And user click on "Continue" button
+    Then user is navigated to "personal-info" screen
+
+  @CBA_179
+  Scenario: 195_Verify the stepper has 4 check marks  and the vehicle checkmark icon is highlighted
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then verify that stepper icon is highlighted
+
+  @CBA_181
+  Scenario: 196_Verify the user sees their selected service(s) in the first sectioned area
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then user sees their selected service in the first sectioned area
+
+  @CBA_182
+  Scenario: 197_Verify the user sees their specified drop off/SAW method the selected services in the first sectioned area
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "1:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then user sees their Drop off or Sit and Wait service in the first sectioned area
+
+  @CBA_183
+  Scenario:198_Verify if the user has chosen an after hours time slot, the "i" icon is present to the right of the appointment type
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "After Hours" timeslot
+    And user is able to click on the done button
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then user is able to see the i button in the review page
+
+  @CBA_184
+  Scenario: 199_Verify if the user clicks the "i" icon, the after hours modal appears
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "After Hours" timeslot
+    And user is able to click on the done button
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then user click on the i button in the review screen
+    Then user is able to see the after model
+
+  @CBA_185
+  Scenario:200_Verify the user sees their additional notes (if any) in the first sectioned area
+    When  user selects "Other" in "services"
+    And user add "my vehicle name is Appache"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "5:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then see their additional notes in the first sectioned area
+
+  @CBA_187
+  Scenario:201_Verify selecting "Edit" in the first sectioned area takes the user to the services screen
+    When  user selects "Other" in "services"
+    And user add "my vehicle name is Appache"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "5:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    And user click on "Edit" button
+    Then user is navigated to "https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota/" screen
+
+  @CBA_19
+  Scenario: 202_Verify "Stay and Wait" functionality
+    When user selects "Oil Change" in "services"
+    When user selects "State Inspection" in "services"
+    When user selects "Tire Rotation" in "services"
+    And user click on "Continue" button
+    Then user should be able to see the stay and wait button
+
+  @CBA_20
+  Scenario: 203_To verify what happens when we select one stay & wait and one Drop-off services
+    When user selects "Oil Change" in "services"
+    When user selects "Battery / Electrical" in "services"
+    And user click on "Continue" button
+    Then Drop Off Vehicle functionality should be enabled
+    Then stay and wait option should be disabled
+
+#  @CBA_21
+#  Scenario: CBA_21_Verify if the user hovers over "Stay and Wait" or "Drop Off Vehicle", the option should go into the hover state
 #    When user selects "Oil Change" in "services"
 #    When user selects "State Inspection" in "services"
 #    When user selects "Tire Rotation" in "services"
 #    And user click on "Continue" button
-#    Then user should be able to see the stay and wait button
-#
-#  @CBA_20
-#  Scenario: CBA_20_To verify what happens when we select one stay & wait and one Drop-off services
-#    When user selects "Oil Change" in "services"
-#    When user selects "Battery / Electrical" in "services"
-#    And user click on "Continue" button
-#    Then Drop Off Vehicle functionality should be enabled
-#    Then stay and wait option should be disabled
-#
-#  @CBA_21
-#  Scenario: CBA_21_Verify if the user hovers over "Stay and Wait" or "Drop Off Vehicle", the option should go into the hover state
-#    When user Click services as Oil Change State Inspection and Tire Rotation
-#    And user click on continue button
 #    And wait for some time to load the page
 #    And hover on "Stay and Wait" Option
+#    Then "Stay and Wait" services should be activated
 #
 #
 #  @CBA_22
 #  Scenario: CBA_22Verify when user clicks on the "I" button then whichever service has stay and wait availability, a chair icon is present to the left of "Stay & Wait Available
-#    When user clicks on the "1" i  button
+#    When user clicks on the "Common Services" "1" toggle button
 #    Then user should be able to see the stay and wait text along with the chair icon
 #
 #  @CBA_23
@@ -853,8 +861,8 @@ Feature: CBA Application
 #    Then verify textbox is mandatory
 #
 #  @CBA_54
-#  Scenario:Verify, when open "i" icon, the x icon is located in the upper right corner of the modal
-#    When user clicks on the "1" i  button
+#  Scenario:CBA_54_Verify, when open "i" icon, the x icon is located in the upper right corner of the modal
+#    When user clicks on the "Common Services" "1"  button
 #    Then verify close button is available on the "informational" modal pop up
 #
 #  @CBA_55
@@ -1066,7 +1074,382 @@ Feature: CBA Application
 #    Then verify After Hours modal appears
 #    Then click on  close button on the "After Hours" modal pop up
 #    And user is navigated to "date-time" screen
-
+#
+#  @CBA_06
+#  Scenario:  CBA_06_Verify when "Common services" up-arrow button is tapped again after selecting services, the services remain selected
+#
+#    When  user selects "Alignment" in "services"
+#    When user clicks on the "Common Services" "1" toggle button
+#    When user clicks on the "Common Services" "1" toggle button
+#    Then "Alignment" services should be activated
+#
+#
+#  @CBA_07
+#  Scenario:  CBA_07_Verify when "Something's wrong" up-arrow button is tapped again after selecting services, the services remain selected.
+#
+#    When user selects "Brakes" in "services"
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    Then "Brakes" services should be activated
+#
+#  @CBA_70
+#  Scenario: Verify the "Continue" button is disabled until "Stay and Wait" or "Drop Off Vehicle" has been chosen
+#    Then user see the "Continue" button is disabled
+#
+#  @CBA_90
+#  Scenario: Verify the user can select only one slot at at time, which is visually indicated to the userWhen  user selects "Alignment" in "services"
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the available timeslot
+#    Then user is able to see the available timeslot
+#    And user select the the available timeslot
+#    Then user is able to see the available timeslot
+#
+#
+#
+#
+#  @CBA_134
+#  Scenario:CBA_134_Verify the user can tap on the "Model" field to choose a model once the year and make have been selected
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#
+#
+#  @CBA_136
+#  Scenario:CBA_136_Verify user can tap on the "Color" field to choose any color from the dropdown
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#
+#
+#
+#  @CBA_138
+#  Scenario:CBA_138_Verify if the user changes the year selection, the appropriate makes are returned for that year
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#    When user clicks on the year button
+#    When user selects the "2020" year and verifies page
+#
+#  @CBA_139
+#  Scenario:CBA_139_Verify if the user changes the make, the appropriate models are returned for that year and make
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Audi" make and validating page
+#
+#
+#
+#  @CBA_140
+#  Scenario:  CBA_140_Verify clicking the "Previous" button will take the user to the date/time screen
+#
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#    And click on the "Previous" button
+#    Then User validating week view page
+#
+#
+#  @CBA_141
+#  Scenario: Verify when the "Previous" button has been clicked, the selected time/date are still selected
+#    When  user selects "Alignment" in "services"
+#    And   user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the available timeslot
+#    And user click on "Continue" button
+#    And user click on "Previous" button
+#    Then user is able to see the available timeslot
+#
+#  @CBA_142
+#  Scenario:  CBA_142_Verify once all of the required fields are selected, clicking the "Continue" button takes the user to the personal info screen
+#
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#    And user click on "Continue" button
+#    Then User validating personal info page
+#
+#  @CBA_143
+#  Scenario: CBA_143_Verify the stepper has 3 check icons and the person icon highlighted followed by the vehicle with a check icon in the stepper
+#
+#
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to see the vehicle info page
+#    And Make model colour buttons are not enabled
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    When user selects the "2021" year and verifies page
+#    When user clicks on the make button
+#    And user validating makes drop down list
+#    When user selects the "Acura" make and validating page
+#    When user clicks on the model button
+#    And user validating  model list drop down
+#    When user selects the "ILX" model
+#    When user clicks on the color dropdown
+#    And user validating  color list drop down
+#    When user selects the "Blue" color
+#    And user click on "Continue" button
+#    Then User validating personal info page
+#    And user verifying stepper mark
+#
+#  @CBA_147
+#  Scenario: Verify the "Continue" button is disabled until the user enters all of the required fields without any errors.
+#    When  user selects "Alignment" in "services"
+#    And   user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the available timeslot
+#    And user click on "Continue" button
+#    When user clicks on the year button
+#    When user selects the "2021" year
+#    When user clicks on the make button
+#    When user selects the "Acura" make
+#    When user clicks on the model button
+#    When user selects the "ILX" model
+#    Then "Continue" button is Enabled
+#
+#  @CBA_129
+#  Scenario:CBA_129_Verify that make is not available until the user has selected a year from the dropdown
+#    When  user selects "Alignment" in "services"
+#    And user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And user able to select available_time
+#    And user click on "Continue" button
+#    Then user is able to validating make button un availability
+#    When user clicks on the year button
+#    And user validating the year drop down list
+#    Then user is able to validating make button availability
+#
+#
+#  @CBA_202
+#  Scenario: Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
+#    When  user selects "Alignment" in "services"
+#    And user add "my vehicle name is Appache"
+#    And   user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the available timeslot
+#    And user click on "Continue" button
+#    When user clicks on the year button
+#    When user selects the "2021" year
+#    When user clicks on the make button
+#    When user selects the "Acura" make
+#    When user clicks on the model button
+#    When user selects the "ILX" model
+#    And user click on "Continue" button
+#    When user is on personal info page
+#    When user enter "firstName" as "Rahul"
+#    When user enter "lastName" as "Kumar"
+#    When user enter "email" as "Rahul12@gmail.com"
+#    When user enter "phone" as "1234567890"
+#    When user enter "altPhone" as "0987654321"
+#    When user enter "zip" as "112223"
+#    When user clicked on the yes button
+#    And user click on "Continue" button
+#    Then user is able to see the chosen location's name as "South Sarasota", address as "5869 Derek Ave", and phone number as "(941) 413-3490" in the third sectioned area.
+#
+#  @CBA_209
+#  Scenario: Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
+#    When  user selects "Alignment" in "services"
+#    And user add "my vehicle name is Appache"
+#    And   user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the available timeslot
+#    And user click on "Continue" button
+#    When user clicks on the year button
+#    When user selects the "2021" year
+#    When user clicks on the make button
+#    When user selects the "Acura" make
+#    When user clicks on the model button
+#    When user selects the "ILX" model
+#    And user click on "Continue" button
+#    When user is on personal info page
+#    When user enter "firstName" as "Rahul"
+#    When user enter "lastName" as "Kumar"
+#    When user enter "email" as "Rahul12@gmail.com"
+#    When user enter "phone" as "1234567890"
+#    When user enter "altPhone" as "0987654321"
+#    When user enter "zip" as "112223"
+#    When user clicked on the yes button
+#    And user click on "Continue" button
+#    And user click on  "4" Edit button in "fourth sectioned area" area
+#    And user is navigated to "personal-info" screen
+#
+#  @CBA_212
+#  Scenario:CBA_212_Verify shuttle service verification is disabled if the user has chosen a stay and wait appointment
+#
+#    When user selects "Oil Change" in "services"
+#    And click on "Continue" button
+#    When user is navigated to "dropoff" screen
+#    And select stay and wait option
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the "5:00 PM" timeslot
+#    And user click on "Continue" button
+#    When user clicks on the year button
+#    When user selects the "2021" year
+#    When user clicks on the make button
+#    When user selects the "Acura" make
+#    When user clicks on the model button
+#    When user selects the "ILX" model
+#    And user click on "Continue" button
+#    When user is on personal info page
+#    When user enter "firstName" as "Rahul"
+#    When user enter "lastName" as "Kumar"
+#    When user enter "email" as "rahul12@gmail.com"
+#    When user enter "phone" as "1234567890"
+#    When user enter "altPhone" as "0987654321"
+#    When user enter "zip" as "112223"
+#    When user clicked on the yes button
+#    And user click on "Continue" button
+#    Then shuttle service option should be disabled
+#
+#
+#  @CBA_213
+#  Scenario:CBA_213_Verify shuttle service verification is disabled if the user has chosen an after hours appointment
+#
+#    When  user selects "Alignment" in "services"
+#    And   user click on "Continue" button
+#    Then "Drop and vehicle" button is already selected
+#    And user click on "Continue" button
+#    And wait for some time to load the page
+#    And user select the the "After Hours" timeslot
+#    And user is able to click on the done button
+#    And user click on "Continue" button
+#    When user clicks on the year button
+#    When user selects the "2021" year
+#    When user clicks on the make button
+#    When user selects the "Acura" make
+#    When user clicks on the model button
+#    When user selects the "ILX" model
+#    And user click on "Continue" button
+#    When user is on personal info page
+#    When user enter "firstName" as "Rahul"
+#    When user enter "lastName" as "Kumar"
+#    When user enter "email" as "rahul12@gmail.com"
+#    When user enter "phone" as "1234567890"
+#    When user enter "altPhone" as "0987654321"
+#    When user enter "zip" as "112223"
+#    When user clicked on the yes button
+#    And user click on "Continue" button
+#    Then hover on "Previous" button
+#    Then shuttle service option should be disabled
 
 
 
