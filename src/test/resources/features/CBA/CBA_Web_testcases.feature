@@ -136,7 +136,7 @@ Feature: CBA Application
     And user is navigated to "date-time" screen
     And click on calender view
 
-  @CBA_115 @CBA1
+  @CBA_115 @CBA
   Scenario: 159_Verify the user can select a day on the calendar and it will return available times for that date
 
     When  user selects "Alignment" in "services"
@@ -259,7 +259,7 @@ Feature: CBA Application
     And user validating the year drop down list
     When user selects the "2021" year and verifies page
 
-  @CBA_132  @CBA1
+  @CBA_132  @CBA
   Scenario:170_Verify user can tap on the "Make" field to choose any make from the dropdown once the year has been selected
 
     When  user selects "Alignment" in "services"
