@@ -556,7 +556,7 @@ Feature: CBA Application
     Then user is navigated to "vehicle-info" screen
     Then user is able to see the "2021" year "Acura" make and "ILX" model
 
-  @CBA_177
+  @CBA_177 @CBA1
   Scenario: 194_Verify tapping the "Continue" button on the vehicle info screen brings the user to the personal information screen with information preserved
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -583,7 +583,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user is navigated to "personal-info" screen
 
-  @CBA_179
+  @CBA_179 @CBA1
   Scenario: 195_Verify the stepper has 4 check marks  and the vehicle checkmark icon is highlighted
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -610,7 +610,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then verify that stepper icon is highlighted
 
-  @CBA_181
+  @CBA_181 @CBA1
   Scenario: 196_Verify the user sees their selected service(s) in the first sectioned area
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -637,7 +637,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user sees their selected service in the first sectioned area
 
-  @CBA_182
+  @CBA_182 @CBA1
   Scenario: 197_Verify the user sees their specified drop off/SAW method the selected services in the first sectioned area
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -664,7 +664,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user sees their Drop off or Sit and Wait service in the first sectioned area
 
-  @CBA_183
+  @CBA_183 @CBA1
   Scenario:198_Verify if the user has chosen an after hours time slot, the "i" icon is present to the right of the appointment type
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -692,7 +692,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user is able to see the i button in the review page
 
-  @CBA_184
+  @CBA_184 @CBA1
   Scenario: 199_Verify if the user clicks the "i" icon, the after hours modal appears
     When  user selects "Alignment" in "services"
     And   user click on "Continue" button
@@ -721,7 +721,7 @@ Feature: CBA Application
     Then user click on the i button in the review screen
     Then user is able to see the after model
 
-  @CBA_185
+  @CBA_185 @CBA1
   Scenario:200_Verify the user sees their additional notes (if any) in the first sectioned area
     When  user selects "Other" in "services"
     And user add "my vehicle name is Appache"
@@ -749,7 +749,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then see their additional notes in the first sectioned area
 
-  @CBA_187
+  @CBA_187 @CBA1
   Scenario:201_Verify selecting "Edit" in the first sectioned area takes the user to the services screen
     When  user selects "Other" in "services"
     And user add "my vehicle name is Appache"
@@ -778,7 +778,7 @@ Feature: CBA Application
     And user click on "Edit" button
     Then user is navigated to "https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota/" screen
 
-  @CBA_19
+  @CBA_19 @CBA1
   Scenario: 202_Verify "Stay and Wait" functionality
     When user selects "Oil Change" in "services"
     When user selects "State Inspection" in "services"
@@ -786,7 +786,7 @@ Feature: CBA Application
     And user click on "Continue" button
     Then user should be able to see the stay and wait button
 
-  @CBA_20
+  @CBA_20 @CBA1
   Scenario: 203_To verify what happens when we select one stay & wait and one Drop-off services
     When user selects "Oil Change" in "services"
     When user selects "Battery / Electrical" in "services"
