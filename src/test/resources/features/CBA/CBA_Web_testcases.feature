@@ -794,42 +794,42 @@ Feature: CBA Application
     Then Drop Off Vehicle functionality should be enabled
     Then stay and wait option should be disabled
 
-#  @CBA_21
-#  Scenario: CBA_21_Verify if the user hovers over "Stay and Wait" or "Drop Off Vehicle", the option should go into the hover state
-#    When user selects "Oil Change" in "services"
-#    When user selects "State Inspection" in "services"
-#    When user selects "Tire Rotation" in "services"
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And hover on "Stay and Wait" Option
-#    Then "Stay and Wait" services should be activated
-#
-#
-#  @CBA_22
-#  Scenario: CBA_22Verify when user clicks on the "I" button then whichever service has stay and wait availability, a chair icon is present to the left of "Stay & Wait Available
-#    When user clicks on the "Common Services" "1" toggle button
-#    Then user should be able to see the stay and wait text along with the chair icon
-#
-#  @CBA_23
-#  Scenario: CBA_23_Verify when a user hovers over an service square box, a hover state should be activated
-#    When user hovers the "Oil Change" services
-#    Then "Oil Change" services should be activated
-#
-#  @CBA_24
-#  Scenario: CBA_24_Verify different services present in the "Something's Wrong" section
-#    And all the services in the Something_s wrong is present
-#    When user selects "Battery / Electrical" in "services"
-#    Then "Battery / Electrical" services should be activated
-#    When user selects "Brakes" in "services"
-#    Then "Brakes" services should be activated
-#
-#
-#
-#
-#  @CBA_25
-#  Scenario:Verify the hover functionality of "Cancel" button
-#    Given user is on the application
-#    Then hover on "Cancel" button
+  @CBA_21 @CBA1
+  Scenario: 205_Verify if the user hovers over "Stay and Wait" or "Drop Off Vehicle", the option should go into the hover state
+    When user selects "Oil Change" in "services"
+    When user selects "State Inspection" in "services"
+    When user selects "Tire Rotation" in "services"
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And hover on "Stay and Wait" Option
+    Then "Stay and Wait" services should be activated
+
+
+  @CBA_22 @CBA1
+  Scenario: 206_Verify when user clicks on the "I" button then whichever service has stay and wait availability, a chair icon is present to the left of "Stay & Wait Available
+    When user clicks on the "Common Services" "1"  button
+    Then user should be able to see the stay and wait text along with the chair icon
+
+  @CBA_23 @CBA1
+  Scenario: 207_Verify when a user hovers over an service square box, a hover state should be activated
+    When user hovers the "Oil Change" services
+    Then "Oil Change" services should be activated
+
+  @CBA_24 @CBA1
+  Scenario: 208_Verify different services present in the "Something's Wrong" section
+    And all the services in the Something_s wrong is present
+    When user selects "Battery / Electrical" in "services"
+    Then "Battery / Electrical" services should be activated
+    When user selects "Brakes" in "services"
+    Then "Brakes" services should be activated
+
+
+
+
+  @CBA_25 @CBA1
+  Scenario:209_Verify the hover functionality of "Cancel" button
+    Given user is on the application
+    Then hover on "Cancel" button
 #
 #  @CBA_38
 #  Scenario:Verify the 'Continue' button is disabled until a service has been chosen
