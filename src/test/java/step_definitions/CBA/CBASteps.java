@@ -990,7 +990,7 @@ public class CBASteps extends KeywordUtil {
         LocalDate today = LocalDate.now();
         String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
         System.out.print("Tomarrow date: " + tomorrow);
-        String str2 = tomorrow.substring(9, 10);
+        String str2 = tomorrow.substring(8, 10);
         System.out.print("tomarrow date: " + str2);
         click(CBAPage.selectingthenextdaydate(str2), str2 + "is selected");
         Thread.sleep(6000);
