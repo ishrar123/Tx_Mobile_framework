@@ -183,7 +183,7 @@ Feature: CBA Application
     Then user is able to see the monthyear
     And user navigates on the "Next day" button and validates next day page
 
-  @CBA_119 @CBA
+  @CBA_119 @CBA4
   Scenario:163_Verify tapping on "Prev day" will take the user to the previous day
 
     When  user selects "Alignment" in "services"
