@@ -4,7 +4,7 @@ Feature: CBA Application
   Background:
     Given user is on the application
 
-  @CBA_02 @CBA
+  @CBA_02 @CBA4
   Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
     When user clicks on the "Something's Wrong" "2"  button
     Then user is able to see an informative page with description of all the car services
@@ -183,7 +183,7 @@ Feature: CBA Application
     Then user is able to see the monthyear
     And user navigates on the "Next day" button and validates next day page
 
-  @CBA_119 @CBA4
+  @CBA_119 @CBA
   Scenario:163_Verify tapping on "Prev day" will take the user to the previous day
 
     When  user selects "Alignment" in "services"
