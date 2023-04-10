@@ -4,7 +4,7 @@ Feature: CBA Application
   Background:
     Given user is on the application
 
-  @CBA_02 @CBA4
+  @CBA_02 @CBA
   Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
     When user clicks on the "Something's Wrong" "2"  button
     Then user is able to see an informative page with description of all the car services
