@@ -4,7 +4,7 @@ Feature: CBA Application
   Background:
     Given user is on the application
 
-  @CBA_02 @CBA4
+  @CBA_02 @CBA
   Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
     When user clicks on the "Something's Wrong" "2"  button
     Then user is able to see an informative page with description of all the car services
@@ -830,112 +830,112 @@ Feature: CBA Application
   Scenario:209_Verify the hover functionality of "Cancel" button
     Given user is on the application
     Then hover on "Cancel" button
-#
-#  @CBA_38
-#  Scenario:Verify the 'Continue' button is disabled until a service has been chosen
-#    Then  verify "Continue" button is disabled
-#    When user selects "Other" in "something's wrong"
-#    Then verify textbox is enabled and message is being displayed
-#
-#  @CBA_41
-#  Scenario:Verify after selecting services, tapping the 'Continue' button takes the user to the Drop Off/SAW screen
-#    When user selects "Oil Change" in "services"
-#    Then click on "Continue" button
-#    Then user is navigated to "drop off" screen
-#
-#  @CBA_46
-#  Scenario:Verify when the user has clicked an icon square, the active state is activated
-#    When user selects "Oil Change" in "services"
-#    Then verify "Oil Change" in "services" is "activated"
-#
-#  @CBA_47
-#  Scenario:Verify when user select more than one service icon and unselect any service, then box should not be highlighted
-#    When user selects "Oil Change" in "services"
-#    When user selects "State Inspection" in "services"
-#    When user unselects "Oil Change" in "services"
-#    Then verify "Oil Change" in "services" is "not highlighted"
-#
-#  @CBA_48
-#  Scenario:Verify if the user has selected the "Other" service, the text area should become required
-#    When user selects "Other" in "something's wrong"
-#    Then verify textbox is mandatory
-#
-#  @CBA_54
-#  Scenario:CBA_54_Verify, when open "i" icon, the x icon is located in the upper right corner of the modal
-#    When user clicks on the "Common Services" "1"  button
-#    Then verify close button is available on the "informational" modal pop up
-#
-#  @CBA_55
-#  Scenario:Verify the first breadcrumb is highlighted
-#    When user selects "Oil Change" in "services"
-#    Then click on "Continue" button
-#    Then verify the first breadcrumb is highlighted
-#
-#  @CBA_56
-#  Scenario:Verify if one service has been selected, the subject line reads "I would like to visit the [location] store for [service]"
-#    When user selects "Oil Change" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then verify subject line - I would like to visit the "South Sarasota" store for "Oil Change" is displayed
-#
-#
-#  @CBA_57
-#  Scenario:Verify if two services have been selected, the subject line reads "I would like to visit the [location] store for [service1] and [service2]"
-#    When user selects "Oil Change" in "services"
-#    When user selects "Pre-Purchase Inspection" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then verify subject line - I would like to visit the "South Sarasota" store for "Oil Change and Pre-Purchase Inspection" is displayed
-#
-#  @CBA_58
-#  Scenario:Verify if three or more services have been selected, the subject line reads "I would like to visit the [location] store for multiple services"
-#    When user selects "Oil Change" in "services"
-#    When user selects "Pre-Purchase Inspection" in "services"
-#    When user selects "Fluid Service" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then verify subject line - I would like to visit the "South Sarasota" store for "multiple services" is displayed
-#
-#
-#  @CBA_59
-#  Scenario:Verify if the user chooses services with SAW availability, the subheading reads "Based on the services you selected, you can choose to wait while we take care of your vehicle."
-#    When user selects "Oil Change" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then the subheading reads "Based on the services you selected, you can choose to wait while we take care of your vehicle."
-#
-#  @CBA_60
-#  Scenario:Verify if the user chooses services with no SAW availability, the subheading reads "Based on the services you selected, we'll need you to drop off your vehicle."
-#    When user selects "Fluid Service" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then the subheading reads "Based on the services you selected, we’ll need you to drop off your vehicle."
-#
-#  @CBA_74
-#  Scenario:Verify if the user selects "Stay and Wait", the shuttle service option is disabled
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And shuttle service option is disabled
-#
-#  @CBA_79
-#  Scenario:Verify if the user clicks the "Previous" button, they are taken to the Services screen
-#    When user selects "Oil Change" in "services"
-#    Then click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then click on "Previous" button
-#    Then user is navigated to "services" screen
-#
-#  @CBA_80
-#  Scenario:Verify if the user clicks the "Previous" button, they are taken to the Services screen
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    Then click on "Previous" button
-#    When user is navigated to "services" screen
-#    Then verify "Oil Change" in "services" is "highlighted"
-#
+
+  @CBA_38 @CBA1
+ Scenario:210_Verify the 'Continue' button is disabled until a service has been chosen
+    Then  verify "Continue" button is disabled
+    When user selects "Other" in "something's wrong"
+    Then verify textbox is enabled and message is being displayed
+
+  @CBA_41 @CBA1
+  Scenario:211_Verify after selecting services, tapping the 'Continue' button takes the user to the Drop Off/SAW screen
+    When user selects "Oil Change" in "services"
+    Then click on "Continue" button
+    Then user is navigated to "drop off" screen
+
+  @CBA_46 @CBA1
+  Scenario:212_Verify when the user has clicked an icon square, the active state is activated
+    When user selects "Oil Change" in "services"
+    Then verify "Oil Change" in "services" is "activated"
+
+  @CBA_47 @CBA1
+  Scenario:213_Verify when user select more than one service icon and unselect any service, then box should not be highlighted
+    When user selects "Oil Change" in "services"
+    When user selects "State Inspection" in "services"
+    When user unselects "Oil Change" in "services"
+    Then verify "Oil Change" in "services" is "not highlighted"
+
+  @CBA_48 @CBA1
+  Scenario:214_Verify if the user has selected the "Other" service, the text area should become required
+    When user selects "Other" in "something's wrong"
+    Then verify textbox is mandatory
+
+  @CBA_54 @CBA3
+  Scenario:215_Verify, when open "i" icon, the x icon is located in the upper right corner of the modal
+    When user clicks on the "Common Services" "1"  button
+    Then verify close button is available on the "informational" modal pop up
+
+  @CBA_55 @CBA3
+  Scenario:216_Verify the first breadcrumb is highlighted
+    When user selects "Oil Change" in "services"
+    Then click on "Continue" button
+    Then verify the first breadcrumb is highlighted
+
+  @CBA_56 @CBA3
+  Scenario:217_Verify if one service has been selected, the subject line reads "I would like to visit the [location] store for [service]"
+    When user selects "Oil Change" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then verify subject line - I would like to visit the "South Sarasota" store for "Oil Change" is displayed
+
+
+  @CBA_57 @CBA3
+  Scenario:218_Verify if two services have been selected, the subject line reads "I would like to visit the [location] store for [service1] and [service2]"
+    When user selects "Oil Change" in "services"
+    When user selects "Pre-Purchase Inspection" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then verify subject line - I would like to visit the "South Sarasota" store for "Oil Change and Pre-Purchase Inspection" is displayed
+
+  @CBA_58 @CBA3
+  Scenario:219_Verify if three or more services have been selected, the subject line reads "I would like to visit the [location] store for multiple services"
+    When user selects "Oil Change" in "services"
+    When user selects "Pre-Purchase Inspection" in "services"
+    When user selects "Fluid Service" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then verify subject line - I would like to visit the "South Sarasota" store for "multiple services" is displayed
+
+
+  @CBA_59 @CBA3
+  Scenario:220_Verify if the user chooses services with SAW availability, the subheading reads "Based on the services you selected, you can choose to wait while we take care of your vehicle."
+    When user selects "Oil Change" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then the subheading reads "Based on the services you selected, you can choose to wait while we take care of your vehicle."
+
+  @CBA_60 @CBA3
+  Scenario:221_Verify if the user chooses services with no SAW availability, the subheading reads "Based on the services you selected, we'll need you to drop off your vehicle."
+    When user selects "Fluid Service" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then the subheading reads "Based on the services you selected, we’ll need you to drop off your vehicle."
+
+  @CBA_74 @CBA3
+  Scenario:222_Verify if the user selects "Stay and Wait", the shuttle service option is disabled
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And shuttle service option is disabled
+
+  @CBA_79 @CBA3
+  Scenario:223_Verify if the user clicks the "Previous" button, they are taken to the Services screen
+    When user selects "Oil Change" in "services"
+    Then click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then click on "Previous" button
+    Then user is navigated to "services" screen
+
+  @CBA_80 @CBA3
+  Scenario:224_Verify if the user clicks "Previous", the previously selected services are still shown on the services screen
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    Then click on "Previous" button
+    When user is navigated to "services" screen
+    Then verify "Oil Change" in "services" is "highlighted"
+
 #  @CBA_82
 #  Scenario:Verify clicking the "Continue" button brings the user to the date/time screen
 #    When user selects "Oil Change" in "services"
@@ -1091,10 +1091,6 @@ Feature: CBA Application
 #    When user clicks on the "Something's Wrong" "2" toggle button
 #    When user clicks on the "Something's Wrong" "2" toggle button
 #    Then "Brakes" services should be activated
-#
-#  @CBA_70
-#  Scenario: Verify the "Continue" button is disabled until "Stay and Wait" or "Drop Off Vehicle" has been chosen
-#    Then user see the "Continue" button is disabled
 #
 #  @CBA_90
 #  Scenario: Verify the user can select only one slot at at time, which is visually indicated to the userWhen  user selects "Alignment" in "services"
