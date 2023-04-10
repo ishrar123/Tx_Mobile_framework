@@ -992,7 +992,6 @@ public class CBASteps extends KeywordUtil {
         System.out.print("Tomarrow date: " + tomorrow);
         String str2 = tomorrow.substring(8, 10);
         System.out.print("tomarrow date: " + str2);
-        Thread.sleep(6000);
         click(CBAPage.selectingthenextdaydate(str2), str2 + "is selected");
         Thread.sleep(6000);
 
