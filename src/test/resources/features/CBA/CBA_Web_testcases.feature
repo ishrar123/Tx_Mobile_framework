@@ -172,7 +172,7 @@ Feature: CBA Application
     Then User validating week view page
 
 
-  @CBA_118 @CBA
+  @CBA_118 @CBA4
   Scenario:162_Verify the user can tap "Next day" to view the time slots for the following day
 
     When  user selects "Alignment" in "services"
