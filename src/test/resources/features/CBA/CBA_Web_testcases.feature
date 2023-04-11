@@ -172,7 +172,7 @@ Feature: CBA Application
     Then User validating week view page
 
 
-  @CBA_118 @CBA4
+  @CBA_118 @CBA
   Scenario:162_Verify the user can tap "Next day" to view the time slots for the following day
 
     When  user selects "Alignment" in "services"
@@ -183,7 +183,7 @@ Feature: CBA Application
     Then user is able to see the monthyear
     And user able to select nextday date in calender and validating
 
-  @CBA_119 @CBA4
+  @CBA_119 @CBA
   Scenario:163_Verify tapping on "Prev day" will take the user to the previous day
 
     When  user selects "Alignment" in "services"
