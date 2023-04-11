@@ -4,32 +4,7 @@ Feature: CBA Application
   Background:
     Given user is on the application
 
-  @CBA_02 @CBA4
-  Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
-    When user clicks on the "Something's Wrong" "2"  button
-    Then user is able to see an informative page with description of all the car services
-
-  @CBA_03 @CBA
-  Scenario: 145_Verify functionality of toggle arrow button in Common Services
-    When user clicks on the "Common Services" "1" toggle button
-    Then user is not able to see the services in common services
-    When user clicks on the "Common Services" "1" toggle button
-    Then user is able to see the services in the common servicess
-
-  @CBA_04 @CBA
-  Scenario:146_Verify that  user select one or multiple "Common services" options at a time.
-    When user selects "Oil Change" in "services"
-    When user selects "Alignment" in "services"
-    When user selects "Tire Rotation" in "services"
-
-  @CBA_05 @CBA
-  Scenario: 147_Verify functionality of toggle arrow button in 'Something's wrong'.
-    When user clicks on the "Something's Wrong" "2" toggle button
-    Then user is not able to see the services in something wrong
-    When user clicks on the "Something's Wrong" "2" toggle button
-    Then user is able to see the services in the something_s wrongs
-
-  @CBA_100 @CBA
+  @CBA_100 @CBA4
   Scenario:148_Verify tapping the "Previous" button takes the user to the Drop Off/SAW screen with the selected option displayed
     When user selects "Oil Change" in "services"
     And click on "Continue" button
@@ -527,7 +502,7 @@ Feature: CBA Application
     When user is on personal info page
     And user enters an invalid "altPhone" "123456789012"
     Then getting the value of "altPhone"
-#            Then user is able to see error message "Please enter a 10 digit phone number"
+
 
   @CBA_176 @CBA1
   Scenario: 184_Verify tapping the "Previous" button will take the user to the Vehicle Info screen
@@ -1447,7 +1422,30 @@ Feature: CBA Application
 #    Then hover on "Previous" button
 #    Then shuttle service option should be disabled
 
-
+#  @CBA_02 @CBA
+#  Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
+#    When user clicks on the "Something's Wrong" "2"  button
+#    Then user is able to see an informative page with description of all the car services
+#
+#  @CBA_03 @CBA
+#  Scenario: 145_Verify functionality of toggle arrow button in Common Services
+#    When user clicks on the "Common Services" "1" toggle button
+#    Then user is not able to see the services in common services
+#    When user clicks on the "Common Services" "1" toggle button
+#    Then user is able to see the services in the common servicess
+#
+#  @CBA_04 @CBA
+#  Scenario:146_Verify that  user select one or multiple "Common services" options at a time.
+#    When user selects "Oil Change" in "services"
+#    When user selects "Alignment" in "services"
+#    When user selects "Tire Rotation" in "services"
+#
+#  @CBA_05 @CBA
+#  Scenario: 147_Verify functionality of toggle arrow button in 'Something's wrong'.
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    Then user is not able to see the services in something wrong
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    Then user is able to see the services in the something_s wrongs
 
 
 
