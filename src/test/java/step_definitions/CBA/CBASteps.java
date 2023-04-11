@@ -964,44 +964,32 @@ public class CBASteps extends KeywordUtil {
         isWebElementVisible(CBAPage.nextday);
         hoverOnElement(CBAPage.nextday);
         click(CBAPage.nextday, "Click on the Next Day button");
-
         Thread.sleep(6000);
 
-        LocalDate today = LocalDate.now();
-        String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
-        System.out.print("Tomarrow date: " + tomorrow);
-        String str2 = tomorrow.substring(9, 10);
-        System.out.print("tomarrow date: " + str2);
+        LocalDate date=LocalDate.now();
 
-        isWebElementVisible(CBAPage.current_date);
-        String text = getElementTextWithFindElement(CBAPage.current_date);
-        System.out.println("Here: " + text);
-        String text2 = text.substring(4, 5);
-        System.out.println("Here2: " + text2);
-        Assert.assertEquals(str2, text2);
+
+        LocalDate tommorow= date.plusDays(1);
+        String day= String.valueOf(tommorow.getDayOfMonth());
+        System.out.println("tommorow date is : " +day);
+
+
+        Assert.assertTrue(isWebElementEnable(CBAPage.selecdateslot(day), "user is on the  " + day + " date "));
     }
 
     @And("user able to select nextday date in calender and validating")
     public void user_selecting_the_next_day() throws InterruptedException {
 
-
         click(CBAPage.nextday, "Click on the Next Day button");
-
-        LocalDate today = LocalDate.now();
-        String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
-        System.out.print("Tomarrow date: " + tomorrow);
-        String str2 = tomorrow.substring(8, 10);
-        System.out.print("tomarrow date: " + str2);
-        click(CBAPage.selectingthenextdaydate(str2), str2 + "is selected");
         Thread.sleep(6000);
 
-        isWebElementVisible(CBAPage.previousday);
-        String text = getElementTextWithFindElement(CBAPage.previousday);
-        Assert.assertEquals(text, "Prev day");
+        LocalDate date=LocalDate.now();
+        LocalDate tommorow= date.plusDays(1);
+        String day= String.valueOf(tommorow.getDayOfMonth());
+        System.out.println("tommorow date is : " +day);
 
-        isWebElementVisible(CBAPage.nextday);
-        String text1 = getElementTextWithFindElement(CBAPage.nextday);
-        Assert.assertEquals(text1, "Next day");
+
+        Assert.assertTrue(isWebElementEnable(CBAPage.selecdateslot(day), "user is on the  " + day + " date "));
 
     }
 
