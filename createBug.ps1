@@ -81,7 +81,7 @@ $projects.value  | ForEach-Object {
     $project = $_.name
     $workTrackingAreaId = "85f8c7b6-92fe-4ba6-8b6d-fbb67c809341"
     $workitemType = "Bug"
-    $Area = "Tx-Automate Framework"
+    $Area = "CBA"
     $AssignedTo = "vaishali.tomar"
     $Reason = "New"
     $tags = "Automation"

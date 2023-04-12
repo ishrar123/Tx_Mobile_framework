@@ -252,12 +252,12 @@ public class CBAPage {
     }
 
     public static By service(String text) {
-        return (By.xpath("//p[@class='service-text' and text()='" + text + "']"));
+        return (By.xpath("//span[@class='service-text' and text()='" + text + "']"));
 
     }
 
     public static By serviceSelected(String text) {
-        return (By.xpath("//p[@class='service-text' and text()='" + text + "']//parent::button[@aria-checked='true']"));
+        return (By.xpath("//span[@class='service-text' and text()='" + text + "']//parent::button[@aria-checked='true']"));
 
     }
 

@@ -1632,6 +1632,13 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    public static String getAttributevalue(By locator,String value){
+        KeywordUtil.lastAction = "Get Element value: " + locator.toString();
+        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
+        WebElement elm = waitForClickable(locator);
+        return elm.getAttribute(value);
+    }
+
     //generate a random number between 20 to 40
     public static int generateRandomNumber20to40() {
         Random random = new Random();
@@ -1696,6 +1703,5 @@ class TestStepFailedException extends Exception {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
-
 
 }

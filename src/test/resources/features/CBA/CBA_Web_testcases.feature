@@ -911,516 +911,512 @@ Feature: CBA Application
     When user is navigated to "services" screen
     Then verify "Oil Change" in "services" is "highlighted"
 
-#  @CBA_82
-#  Scenario:Verify clicking the "Continue" button brings the user to the date/time screen
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And click on "Continue" button
-#    Then user is navigated to "date-time" screen
-#
-#  @CBA_83
-#  Scenario: Verify the stepper has 1 checkmark and highlighted calendar icon followed by vehicle icon, person icon, and vehicle with a checkmark icon
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And click on "Continue" button
-#    Then user is navigated to "date-time" screen
-#    Then verify that stepper icon is highlighted
-#
-#  @CBA_84
-#  Scenario:Verify the screen reads "What day and time work best for you?" followed by "Our current availability is listed below. Please select what is most convenient for you."
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And click on "Continue" button
-#    Then user is navigated to "date-time" screen
-#    Then verify "What day and time work best for you?" is displayed
-#    Then verify "Our current availability is listed below. Please select what is most convenient for you." is displayed
-#
-#  @CBA_87
-#  Scenario:Verify the "Continue" button is disabled until the user selects a time slot.
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And click on "Continue" button
-#    Then user is navigated to "date-time" screen
-#    Then  verify "Continue" button is disabled
-#
-#  @CBA_89
-#  Scenario:Verify the number of time slots available matches the number listed
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    Then verify the number of time slots available matches the number listed
-#
-#
-#  @CBA_92
-#  Scenario:Verify if the user has selected the stay and wait option, the "After Hours" time slot option is not available
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    Then verify After Hours time slot is "not available"
-#
-#  @CBA_94
-#  Scenario:Verify if "After Hours" drop off is chosen, a modal appears
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#
-#
-#  @CBA_95
-#  Scenario:Verify the text for the after hours modal
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#    Then verify "You’ve selected After Hours Drop Off." is displayed
-#    Then verify "What's next?" is displayed
-#    Then verify "Remove any valuables" is displayed
-#    Then verify "Lock your vehicle" is displayed
-#    Then verify "Place only your vehicle key through slot in the door or as instructed (see signage near front door)" is displayed
-#    Then verify "We will contact you prior to performing any work. Thank you!" is displayed
-#
-#  @CBA_96
-#  Scenario:Verify the after hours modal contains a "Done" button
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#    Then user is able to see "Done" button
-#
-#  @CBA_97
-#  Scenario:Verify, when clicked, the after hours "Done" button closes the modal and returns the user to the time/date screen
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#    Then click on "Done" button
-#    Then user is navigated to "date-time" screen
-#
-#  @CBA_98
-#  Scenario:Verify the presence of the X icon in the after hours modal
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#    Then verify close button is available on the "After Hours" modal pop up
-#
-#  @CBA_99
-#  Scenario:Verify clicking the X icon in the after hours modal closes the modal and returns the user to the time/date screen
-#    Given user is on the application
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And click on "Continue" button
-#    And user is navigated to "date-time" screen
-#    And click on "After Hours" time slot
-#    Then verify After Hours modal appears
-#    Then click on  close button on the "After Hours" modal pop up
-#    And user is navigated to "date-time" screen
-#
-#  @CBA_06
-#  Scenario:  CBA_06_Verify when "Common services" up-arrow button is tapped again after selecting services, the services remain selected
-#
-#    When  user selects "Alignment" in "services"
-#    When user clicks on the "Common Services" "1" toggle button
-#    When user clicks on the "Common Services" "1" toggle button
-#    Then "Alignment" services should be activated
-#
-#
-#  @CBA_07
-#  Scenario:  CBA_07_Verify when "Something's wrong" up-arrow button is tapped again after selecting services, the services remain selected.
-#
-#    When user selects "Brakes" in "services"
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    Then "Brakes" services should be activated
-#
-#  @CBA_90
-#  Scenario: Verify the user can select only one slot at at time, which is visually indicated to the userWhen  user selects "Alignment" in "services"
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the available timeslot
-#    Then user is able to see the available timeslot
-#    And user select the the available timeslot
-#    Then user is able to see the available timeslot
-#
-#
-#
-#
-#  @CBA_134
-#  Scenario:CBA_134_Verify the user can tap on the "Model" field to choose a model once the year and make have been selected
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#
-#
-#  @CBA_136
-#  Scenario:CBA_136_Verify user can tap on the "Color" field to choose any color from the dropdown
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#
-#
-#
-#  @CBA_138
-#  Scenario:CBA_138_Verify if the user changes the year selection, the appropriate makes are returned for that year
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#    When user clicks on the year button
-#    When user selects the "2020" year and verifies page
-#
-#  @CBA_139
-#  Scenario:CBA_139_Verify if the user changes the make, the appropriate models are returned for that year and make
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Audi" make and validating page
-#
-#
-#
-#  @CBA_140
-#  Scenario:  CBA_140_Verify clicking the "Previous" button will take the user to the date/time screen
-#
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#    And click on the "Previous" button
-#    Then User validating week view page
-#
-#
-#  @CBA_141
-#  Scenario: Verify when the "Previous" button has been clicked, the selected time/date are still selected
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the available timeslot
-#    And user click on "Continue" button
-#    And user click on "Previous" button
-#    Then user is able to see the available timeslot
-#
-#  @CBA_142
-#  Scenario:  CBA_142_Verify once all of the required fields are selected, clicking the "Continue" button takes the user to the personal info screen
-#
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#    And user click on "Continue" button
-#    Then User validating personal info page
-#
-#  @CBA_143
-#  Scenario: CBA_143_Verify the stepper has 3 check icons and the person icon highlighted followed by the vehicle with a check icon in the stepper
-#
-#
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to see the vehicle info page
-#    And Make model colour buttons are not enabled
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    When user selects the "2021" year and verifies page
-#    When user clicks on the make button
-#    And user validating makes drop down list
-#    When user selects the "Acura" make and validating page
-#    When user clicks on the model button
-#    And user validating  model list drop down
-#    When user selects the "ILX" model
-#    When user clicks on the color dropdown
-#    And user validating  color list drop down
-#    When user selects the "Blue" color
-#    And user click on "Continue" button
-#    Then User validating personal info page
-#    And user verifying stepper mark
-#
-#  @CBA_147
-#  Scenario: Verify the "Continue" button is disabled until the user enters all of the required fields without any errors.
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the available timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    Then "Continue" button is Enabled
-#
-#  @CBA_129
-#  Scenario:CBA_129_Verify that make is not available until the user has selected a year from the dropdown
-#    When  user selects "Alignment" in "services"
-#    And user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And user able to select available_time
-#    And user click on "Continue" button
-#    Then user is able to validating make button un availability
-#    When user clicks on the year button
-#    And user validating the year drop down list
-#    Then user is able to validating make button availability
-#
-#
-#  @CBA_202
-#  Scenario: Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
-#    When  user selects "Alignment" in "services"
-#    And user add "my vehicle name is Appache"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the available timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then user is able to see the chosen location's name as "South Sarasota", address as "5869 Derek Ave", and phone number as "(941) 413-3490" in the third sectioned area.
-#
-#  @CBA_209
-#  Scenario: Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
-#    When  user selects "Alignment" in "services"
-#    And user add "my vehicle name is Appache"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the available timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "Rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    And user click on  "4" Edit button in "fourth sectioned area" area
-#    And user is navigated to "personal-info" screen
-#
-#  @CBA_212
-#  Scenario:CBA_212_Verify shuttle service verification is disabled if the user has chosen a stay and wait appointment
-#
-#    When user selects "Oil Change" in "services"
-#    And click on "Continue" button
-#    When user is navigated to "dropoff" screen
-#    And select stay and wait option
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "5:00 PM" timeslot
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then shuttle service option should be disabled
-#
-#
-#  @CBA_213
-#  Scenario:CBA_213_Verify shuttle service verification is disabled if the user has chosen an after hours appointment
-#
-#    When  user selects "Alignment" in "services"
-#    And   user click on "Continue" button
-#    Then "Drop and vehicle" button is already selected
-#    And user click on "Continue" button
-#    And wait for some time to load the page
-#    And user select the the "After Hours" timeslot
-#    And user is able to click on the done button
-#    And user click on "Continue" button
-#    When user clicks on the year button
-#    When user selects the "2021" year
-#    When user clicks on the make button
-#    When user selects the "Acura" make
-#    When user clicks on the model button
-#    When user selects the "ILX" model
-#    And user click on "Continue" button
-#    When user is on personal info page
-#    When user enter "firstName" as "Rahul"
-#    When user enter "lastName" as "Kumar"
-#    When user enter "email" as "rahul12@gmail.com"
-#    When user enter "phone" as "1234567890"
-#    When user enter "altPhone" as "0987654321"
-#    When user enter "zip" as "112223"
-#    When user clicked on the yes button
-#    And user click on "Continue" button
-#    Then hover on "Previous" button
-#    Then shuttle service option should be disabled
+  @CBA_82 @CBA6
+  Scenario:229_Verify clicking the "Continue" button brings the user to the date/time screen
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And click on "Continue" button
+    Then user is navigated to "date-time" screen
+
+  @CBA_83 @CBA6
+  Scenario: 230_Verify the stepper has 1 checkmark and highlighted calendar icon followed by vehicle icon, person icon, and vehicle with a checkmark icon
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And click on "Continue" button
+    Then user is navigated to "date-time" screen
+    Then verify that stepper icon is highlighted
+
+  @CBA_84 @CBA6
+  Scenario:231_Verify the screen reads "What day and time work best for you?" followed by "Our current availability is listed below. Please select what is most convenient for you."
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And click on "Continue" button
+    Then user is navigated to "date-time" screen
+    Then verify "What day and time work best for you?" is displayed
+    Then verify "Our current availability is listed below. Please select what is most convenient for you." is displayed
+
+  @CBA_87 @CBA6
+  Scenario:232_Verify the "Continue" button is disabled until the user selects a time slot.
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And click on "Continue" button
+    Then user is navigated to "date-time" screen
+    Then  verify "Continue" button is disabled
+
+  @CBA_89 @CBA6
+  Scenario:233_Verify the number of time slots available matches the number listed
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    Then verify the number of time slots available matches the number listed
+
+
+  @CBA_92 @CBA6
+  Scenario:234_Verify if the user has selected the stay and wait option, the "After Hours" time slot option is not available
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    Then verify After Hours time slot is "not available"
+
+  @CBA_94 @CBA6
+  Scenario:235_Verify if "After Hours" drop off is chosen, a modal appears
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+
+
+  @CBA_95 @CBA6
+  Scenario:236_Verify the text for the after hours modal
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+    Then verify "You’ve selected After Hours Drop Off." is displayed
+    Then verify "What's next?" is displayed
+    Then verify "Remove any valuables" is displayed
+    Then verify "Lock your vehicle" is displayed
+    Then verify "Place only your vehicle key through slot in the door or as instructed (see signage near front door)" is displayed
+    Then verify "We will contact you prior to performing any work. Thank you!" is displayed
+
+  @CBA_96 @CBA6
+  Scenario:237_Verify the after hours modal contains a "Done" button
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+    Then user is able to see "Done" button
+
+  @CBA_97 @CBA6
+  Scenario:238_Verify, when clicked, the after hours "Done" button closes the modal and returns the user to the time/date screen
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+    Then click on "Done" button
+    Then user is navigated to "date-time" screen
+
+  @CBA_98 @CBA6
+  Scenario:239_Verify the presence of the X icon in the after hours modal
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+    Then verify close button is available on the "After Hours" modal pop up
+
+  @CBA_99 @CBA6
+  Scenario:240_Verify clicking the X icon in the after hours modal closes the modal and returns the user to the time/date screen
+    Given user is on the application
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And click on "Continue" button
+    And user is navigated to "date-time" screen
+    And click on "After Hours" time slot
+    Then verify After Hours modal appears
+    Then click on  close button on the "After Hours" modal pop up
+    And user is navigated to "date-time" screen
+
+
+  @CBA_90 @CBA6
+  Scenario: 241_Verify the user can select only one slot at at time, which is visually indicated to the userWhen  user selects "Alignment" in "services"
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the available timeslot
+    Then user is able to see the available timeslot
+    And user select the the available timeslot
+    Then user is able to see the available timeslot
+
+
+
+
+  @CBA_134 @CBA6
+  Scenario:242_Verify the user can tap on the "Model" field to choose a model once the year and make have been selected
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+
+
+  @CBA_136 @CBA6
+  Scenario:243_Verify user can tap on the "Color" field to choose any color from the dropdown
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+    And user validating  color list drop down
+    When user selects the "Blue" color
+
+
+
+  @CBA_138 @CBA7
+  Scenario:244_Verify if the user changes the year selection, the appropriate makes are returned for that year
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user select the the available timeslot
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+
+    When user selects the "Blue" color
+    And user able to see the year_model_make
+
+    When user clicks on the year button
+    When user selects the "2020" year
+    And user able to see the year_model_make
+
+  @CBA_139 @CBA6
+  Scenario:245_Verify if the user changes the make, the appropriate models are returned for that year and make
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+    And user validating  color list drop down
+    When user selects the "Blue" color
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Audi" make and validating page
+
+
+
+  @CBA_140 @CBA6
+  Scenario:  246_Verify clicking the "Previous" button will take the user to the date/time screen
+
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+    And user validating  color list drop down
+    When user selects the "Blue" color
+    And click on the "Previous" button
+    Then User validating week view page
+
+
+  @CBA_141 @CBA6
+  Scenario: 247_Verify when the "Previous" button has been clicked, the selected time/date are still selected
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the available timeslot
+    And user click on "Continue" button
+    And user click on "Previous" button
+    Then user is able to see the available timeslot
+
+  @CBA_142 @CBA6
+  Scenario:  248_Verify once all of the required fields are selected, clicking the "Continue" button takes the user to the personal info screen
+
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+    And user validating  color list drop down
+    When user selects the "Blue" color
+    And user click on "Continue" button
+    Then User validating personal info page
+
+  @CBA_143 @CBA6
+  Scenario: 249_Verify the stepper has 3 check icons and the person icon highlighted followed by the vehicle with a check icon in the stepper
+
+
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to see the vehicle info page
+    And Make model colour buttons are not enabled
+    When user clicks on the year button
+    And user validating the year drop down list
+    When user selects the "2021" year and verifies page
+    When user clicks on the make button
+    And user validating makes drop down list
+    When user selects the "Acura" make and validating page
+    When user clicks on the model button
+    And user validating  model list drop down
+    When user selects the "ILX" model
+    When user clicks on the color dropdown
+    And user validating  color list drop down
+    When user selects the "Blue" color
+    And user click on "Continue" button
+    Then User validating personal info page
+    And user verifying stepper mark
+
+  @CBA_147 @CBA6
+  Scenario: 250_Verify the "Continue" button is disabled until the user enters all of the required fields without any errors.
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the available timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    Then "Continue" button is Enabled
+
+  @CBA_129 @CBA6
+  Scenario:251_Verify that make is not available until the user has selected a year from the dropdown
+    When  user selects "Alignment" in "services"
+    And user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And user able to select available_time
+    And user click on "Continue" button
+    Then user is able to validating make button un availability
+    When user clicks on the year button
+    And user validating the year drop down list
+    Then user is able to validating make button availability
+
+
+  @CBA_202 @CBA6
+  Scenario: 252_Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
+    When  user selects "Alignment" in "services"
+    And user add "my vehicle name is Appache"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the available timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then user is able to see the chosen location's name as "South Sarasota", address as "5869 Derek Ave", and phone number as "(941) 413-3490" in the third sectioned area.
+
+  @CBA_209 @CBA6
+  Scenario: 253_Verify the chosen location's name, address, and phone number are displayed in the third sectioned area
+    When  user selects "Alignment" in "services"
+    And user add "my vehicle name is Appache"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the available timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "Rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    And user click on  "4" Edit button in "fourth sectioned area" area
+    And user is navigated to "personal-info" screen
+
+  @CBA_212 @CBA6
+  Scenario: 254_Verify shuttle service verification is disabled if the user has chosen a stay and wait appointment
+
+    When user selects "Oil Change" in "services"
+    And click on "Continue" button
+    When user is navigated to "dropoff" screen
+    And select stay and wait option
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "5:00 PM" timeslot
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then shuttle service option should be disabled
+
+
+  @CBA_213 @CBA6
+  Scenario:255_Verify shuttle service verification is disabled if the user has chosen an after hours appointment
+
+    When  user selects "Alignment" in "services"
+    And   user click on "Continue" button
+    Then "Drop and vehicle" button is already selected
+    And user click on "Continue" button
+    And wait for some time to load the page
+    And user select the the "After Hours" timeslot
+    And user is able to click on the done button
+    And user click on "Continue" button
+    When user clicks on the year button
+    When user selects the "2021" year
+    When user clicks on the make button
+    When user selects the "Acura" make
+    When user clicks on the model button
+    When user selects the "ILX" model
+    And user click on "Continue" button
+    When user is on personal info page
+    When user enter "firstName" as "Rahul"
+    When user enter "lastName" as "Kumar"
+    When user enter "email" as "rahul12@gmail.com"
+    When user enter "phone" as "1234567890"
+    When user enter "altPhone" as "0987654321"
+    When user enter "zip" as "112223"
+    When user clicked on the yes button
+    And user click on "Continue" button
+    Then hover on "Previous" button
+    Then shuttle service option should be disabled
+
+  @CBA_49 @CBA6
+  Scenario: 256_Verify when user enter more than 500 characters in the text box (including spaces)
+    When  user selects "Other" in "services"
+    And user add "my vehicle name is Appache" and validating size is not more than 500
+
+  @CBA_51 @CBA
+  Scenario: 257_Verify, the modal is open when click on "i" icon, the portion of the screen outside of the modal is blurred
+    When user clicks on the "Common Services" "1"  button
+    Then user not able to see "Other" in "services"
 
 #  @CBA_02 @CBA
 #  Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
@@ -1447,7 +1443,23 @@ Feature: CBA Application
 #    When user clicks on the "Something's Wrong" "2" toggle button
 #    Then user is able to see the services in the something_s wrongs
 
-
+#  @CBA_06
+#  Scenario:  CBA_06_Verify when "Common services" up-arrow button is tapped again after selecting services, the services remain selected
+#
+#    When  user selects "Alignment" in "services"
+#    When user clicks on the "Common Services" "1" toggle button
+#    When user clicks on the "Common Services" "1" toggle button
+#    Then "Alignment" services should be activated
+#
+#
+#  @CBA_07
+#  Scenario:  CBA_07_Verify when "Something's wrong" up-arrow button is tapped again after selecting services, the services remain selected.
+#
+#    When user selects "Brakes" in "services"
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    When user clicks on the "Something's Wrong" "2" toggle button
+#    Then "Brakes" services should be activated
+#
 
 
 

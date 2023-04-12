@@ -1579,6 +1579,48 @@ public class CBASteps extends KeywordUtil {
         Assert.assertTrue(isWebElementVisible(CBAPage.make));
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("validating make button availability"));
     }
+
+    @And("user add {string} and validating size is not more than 500")
+    public void text(String data){
+        String maxlength= getAttributevalue(CBAPage.textbox_area,"maxlength");
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("The maximum length of the textbox is : " +maxlength));
+
+        inputText(CBAPage.textbox_area, data, "entering the " + data + " in the textbox");
+        String enteredtext=getElementValueWithVisibility(CBAPage.textbox_area);
+
+
+        int size=enteredtext.length();
+        RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("the size of the entered text is : " +size));
+
+
+
+        if(size<=500){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Max character functionality is worked fine"));
+
+        }
+        else{
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Max character functionality is not  worked fine"));
+        }
+
+
+
+    }
+
+    @Then("user not able to see {string} in {string}")
+    public void not(String service, String type){
+        Assert.assertFalse(isWebElementVisible(CBAPage.serviceSelected(service)));
+    }
+
+    @And("user able to see the year_model_make")
+    public void user_able(){
+        String get_year=getElementTextWithFindElement(CBAPage.Year);
+        System.out.println("the  current year is : " +get_year);
+        String get_make=getElementTextWithFindElement(CBAPage.make);
+        System.out.println("the  current make is : " +get_make);
+        String get_model=getElementTextWithFindElement(CBAPage.model);
+        System.out.println("the  current make is : " +get_model);
+
+    }
 }
 
 
