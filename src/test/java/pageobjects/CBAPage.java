@@ -46,7 +46,7 @@ public class CBAPage {
     public static By current_month = By.xpath("//div[@class='react-datepicker__current-month']");
 
 
-    public static By Something_s_wrong_services = By.xpath("//h2[text()=\"Something's Wrong\"]//ancestor::section[@class='landing-services-section']//p[@class='service-text']");
+    public static By Something_s_wrong_services = By.xpath("//h2[text()=\"Something's Wrong\"]//ancestor::section[@class='landing-services-section']//span[@class='service-text']");
 
 
 
@@ -233,7 +233,7 @@ public class CBAPage {
     }
 
     public static By subjectLine(String location, String service) {
-        return (By.xpath("//h1[text()='I would like to visit the ' and text()=' store for ']//a[text()='" + location + "']//following-sibling::i[contains(text(),'" + service + "')]"));
+        return (By.xpath("//h1[text()='I would like to visit the' and text()='store for ']//a[text()='" + location + "']//following-sibling::i[contains(text(),'" + service + "')]"));
     }
 
     public static By subheading(String text) {
@@ -262,7 +262,7 @@ public class CBAPage {
     }
 
     public static By serviceNotSelected(String text) {
-        return (By.xpath("//p[@class='service-text' and text()='" + text + "']//parent::button[@aria-checked='false']"));
+        return (By.xpath("//span[@class='service-text' and text()='" + text + "']//parent::button[@aria-checked='false']"));
 
     }
 

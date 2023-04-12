@@ -846,7 +846,7 @@ Feature: CBA Application
     Then click on "Continue" button
     Then verify the first breadcrumb is highlighted
 
-  @CBA_56 @CBA3
+  @CBA_56 @CBA7
   Scenario:217_Verify if one service has been selected, the subject line reads "I would like to visit the [location] store for [service]"
     When user selects "Oil Change" in "services"
     Then click on "Continue" button
@@ -1112,7 +1112,7 @@ Feature: CBA Application
 
 
 
-  @CBA_138 @CBA7
+  @CBA_138 @CBA
   Scenario:244_Verify if the user changes the year selection, the appropriate makes are returned for that year
 
     When  user selects "Alignment" in "services"
