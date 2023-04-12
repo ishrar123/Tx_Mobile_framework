@@ -4,7 +4,7 @@ Feature: CBA Application
   Background:
     Given user is on the application
 
-  @CBA_100 @CBA
+  @CBA_100 @CBA4
   Scenario:148_Verify tapping the "Previous" button takes the user to the Drop Off/SAW screen with the selected option displayed
     When user selects "Oil Change" in "services"
     And click on "Continue" button
@@ -16,7 +16,7 @@ Feature: CBA Application
     Then user is navigated to "dropoff" screen
     Then verify "drop off" option is selected
 
-  @CBA_102 @CBA4
+  @CBA_102 @CBA
   Scenario: 149_Verify the user's time slot selection is present after navigating to the drop off/SAW screen and back
     When  user selects "Alignment" in "services"
     And user click on "Continue" button
