@@ -490,7 +490,7 @@ public class CBASteps extends KeywordUtil {
                 Assert.assertTrue(isWebElementVisible(CBAPage.stayAndWaitIconSelected));
                 break;
             case "drop off":
-                Assert.assertFalse(isWebElementVisible(CBAPage.dropoffIcon));
+                Assert.assertTrue(isWebElementVisible(CBAPage.dropoffIcon));
                 break;
 
         }
