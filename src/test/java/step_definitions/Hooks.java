@@ -29,133 +29,167 @@ public class Hooks {
     String pathForLogger;
     String screenshotFilePath;
 
-    @Before("@CBA_testcases")
+    @Before("@Amazon")
     public void beforeMethodAmazon(Scenario scenario) {
 
-//        if (scenario.getName().contains("_"))
-//            testCaseDescription = scenario.getName().split("_")[1].trim();
-//        else
-        testCaseDescription = scenario.getName();
-
+        if (scenario.getName().contains("_"))
+            testCaseDescription = scenario.getName().split("_")[1];
+        else
+            testCaseDescription = scenario.getName();
         RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
-        RunCukesTest.tagName = scenario.getSourceTagNames().toString().replace("[@", "").replace("]", "").trim();
 
         LogUtil.infoLog(getClass(),
                 "\n+----------------------------------------------------------------------------------------------------------------------------+");
         LogUtil.infoLog(getClass(), "Test Started: " + scenario.getName());
-        LogUtil.infoLog(Hooks.class,
-                "Test is executed in Environment: " + GlobalUtil.getCommonSettings().getExecutionEnv());
-        LogUtil.infoLog(Hooks.class, "Test is started with browser: " + GlobalUtil.getCommonSettings().getBrowser());
 
+        LogUtil.infoLog(getClass(),
+                "Test is executed in Environment: " + GlobalUtil.getCommonSettings().getExecutionEnv());
+
+        LogUtil.infoLog(getClass(), "Test is started with browser: " + GlobalUtil.getCommonSettings().getBrowser());
         GlobalUtil.setDriver(DriverUtil.getBrowser(GlobalUtil.getCommonSettings().getExecutionEnv(),
                 GlobalUtil.getCommonSettings().getBrowser()));
     }
 
-    //    @Before("")
+    @Before("@APItests")
     public void beforeAPIMethod(Scenario scenario) {
 
-//        if (scenario.getName().contains("_"))
-//            testCaseDescription = scenario.getName().split("_")[1];
-//        else
-        testCaseDescription = scenario.getName();
-
+        if (scenario.getName().contains("_"))
+            testCaseDescription = scenario.getName().split("_")[1];
+        else
+            testCaseDescription = scenario.getName();
         RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
-        RunCukesTest.tagName = scenario.getSourceTagNames().toString().replace("[@", "").replace("]", "").trim();
+
         LogUtil.infoLog(getClass(),
                 "\n+----------------------------------------------------------------------------------------------------------------------------+");
         LogUtil.infoLog(getClass(), "API Test Started: " + scenario.getName());
-        LogUtil.infoLog(Hooks.class, "Test is started using base URL: " + GlobalUtil.getCommonSettings().getRestURL());
+        LogUtil.infoLog(getClass(),
+                "Test is started using base URL: " + GlobalUtil.getCommonSettings().getRestURL());
     }
 
-    //    @Before("")
+    @Before("@APItestsAcceptance")
+    public void beforeAPIMethodAcceptance(Scenario scenario) {
+
+        if (scenario.getName().contains("_"))
+            testCaseDescription = scenario.getName().split("_")[1];
+        else
+            testCaseDescription = scenario.getName();
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+
+        LogUtil.infoLog(getClass(),
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "API Test Started: " + scenario.getName());
+        LogUtil.infoLog(getClass(),
+                "Test is started using base URL: " + GlobalUtil.getCommonSettings().getRestURL());
+    }
+
+    @Before("@APItestsSmoke")
+    public void beforeAPIMethodSmoke(Scenario scenario) {
+
+        if (scenario.getName().contains("_"))
+            testCaseDescription = scenario.getName().split("_")[1];
+        else
+            testCaseDescription = scenario.getName();
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+
+        LogUtil.infoLog(getClass(),
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "API Test Started: " + scenario.getName());
+        LogUtil.infoLog(getClass(),
+                "Test is started using base URL: " + GlobalUtil.getCommonSettings().getRestURL());
+    }
+
+    @Before("@MobileTest")
     public void beforeMobileTestMethod(Scenario scenario) throws Exception {
 
-//        if (scenario.getName().contains("_"))
-//            testCaseDescription = scenario.getName().split("_")[1].trim();
-//        else
-        testCaseDescription = scenario.getName();
-
+        testCaseDescription = scenario.getName().split("_")[1];
         RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
-        RunCukesTest.tagName = scenario.getSourceTagNames().toString().replace("[@", "").replace("]", "").trim();
 
         LogUtil.infoLog(getClass(),
                 "\n+----------------------------------------------------------------------------------------------------------------------------+");
         LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
 
-        LogUtil.infoLog(Hooks.class,
+        LogUtil.infoLog(getClass(),
                 "Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
+
+        //GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+        // GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
     }
 
-    @AfterStep
-    public void afterEachStep(Scenario scenario) {
-        boolean flag = Boolean.parseBoolean(ConfigReader.getValue("ScreenshotFlag"));
-        String testName = scenario.getName();//.split("_")[0].trim();
-        JavascriptExecutor jse = (JavascriptExecutor) GlobalUtil.getDriver();
+    @Before("@MobileTest1")
+    public void beforeMobileMethod(Scenario scenario) throws Exception {
 
-        try {
-            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")
-                    && GlobalUtil.getCommonSettings().getCloudProvider().equalsIgnoreCase("Browserstack")) {
-                jse.executeScript(
-                        "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\"}}");
-            }
-            String scFileName = "ScreenShot_" + System.currentTimeMillis();
+        testCaseDescription = scenario.getName().split("_")[1];
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
 
-            if (scenario.isFailed()) {
-                //screenshot path in case of failure
-                screenshotFilePath = ConfigReader.getValue("screenshotPath") + File.separator + scFileName + ".png";
-                imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
-                InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = IOUtils.toByteArray(is);
-                Thread.sleep(2000);
-                String base64 = Base64.getEncoder().encodeToString(imageBytes);
-                pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
+        LogUtil.infoLog(getClass(),
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
 
-                RunCukesTest.logger.log(LogStatus.FAIL,
-                        HTMLReportUtil.failStringRedColor("Failed at point: " + "\n" + KeywordUtil.getCurrentUrl() + pathForLogger) + GlobalUtil.e);
-                byte[] screenshot = KeywordUtil.takeScreenshot(imagePath);
-                scenario.attach(screenshot, "image/png", "Screenshot");
+        LogUtil.infoLog(getClass(),
+                "Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
 
-            } else if (flag) {
-                //screenshot path after each step definition on pass
-                screenshotFilePath = ConfigReader.getValue("screenshotPathPass") + File.separator + scFileName + ".png";
-                imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
-                InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = IOUtils.toByteArray(is);
-                Thread.sleep(2000);
-                String base64 = Base64.getEncoder().encodeToString(imageBytes);
-                pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
-                RunCukesTest.logger.log(LogStatus.PASS,
-                        HTMLReportUtil.passStringGreenColor("" + pathForLogger));
+        //GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+        // GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
+    }
+    @Before("@MobileTest4")
+    public void beforeMobileMethods(Scenario scenario) throws Exception {
 
-                byte[] screenshot = KeywordUtil.takeScreenshot(imagePath);
-                scenario.attach(screenshot, "image/png", "Screenshot");
+        testCaseDescription = scenario.getName().split("_")[1];
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
 
-            } else {
+        LogUtil.infoLog(getClass(),
 
-				RunCukesTest.logger.log(LogStatus.PASS,
-						HTMLReportUtil.passStringGreenColor(scenario.getName() ));
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
 
-                LogUtil.infoLog(Hooks.class,
-                        "Test has ended closing browser: " + GlobalUtil.getCommonSettings().getBrowser());
+        LogUtil.infoLog(getClass(),
+                "Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+        // GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
     }
 
-    @After("@CBA_testcases")
+
+    @Before("@MobileTestAcceptance")
+    public void beforeMobileMethodAcceptance(Scenario scenario) throws Exception {
+
+        testCaseDescription = scenario.getName().split("_")[1];
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+
+        LogUtil.infoLog(getClass(),
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
+
+        LogUtil.infoLog(getClass(),"Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
+
+        // GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+        GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
+    }
+
+    @Before("@MobileTestSmoke")
+    public void beforeMobileMethodSmoke(Scenario scenario) throws Exception {
+
+        testCaseDescription = scenario.getName().split("_")[1];
+        RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+
+        LogUtil.infoLog(getClass(),
+                "\n+----------------------------------------------------------------------------------------------------------------------------+");
+        LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
+
+        LogUtil.infoLog(getClass(),
+                "Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
+
+        // GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+        //GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
+    }
+
+    @After("@Amazon")
     public void afterMethodSmoke(Scenario scenario) {
-        String testId;
-        if (scenario.getName().contains("_"))
-            testId = scenario.getName().split("_")[0].trim();
-        else
-            testId = scenario.getName();
-
+        String testName = scenario.getName().split("_")[0].trim();
         if (scenario.isFailed()) {
             try {
-                //Taking Screenshot and putting into the report
                 String scFileName = "ScreenShot_" + System.currentTimeMillis();
+                //String screenshotFilePath = "./ExecutionReports/FailedScreenshots/" + scFileName + ".png";
                 String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
@@ -163,140 +197,60 @@ public class Hooks {
                 byte[] imageBytes = IOUtils.toByteArray(is);
                 Thread.sleep(2000);
                 String base64 = Base64.getEncoder().encodeToString(imageBytes);
-                pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
-                RunCukesTest.logger.log(LogStatus.FAIL,
-                        HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) + GlobalUtil.e);
+                pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64,"+base64);
+                //pathForLogger = RunCukesTest.logger.addScreenCapture(base64);
+                RunCukesTest.logger.log(LogStatus.FAIL,HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) + GlobalUtil.e);
 
-                byte[] screenshot = KeywordUtil.takeScreenshot(imagePath);
-                scenario.attach(screenshot, "image/png", "Failed Screenshot");
-
-                // report the bug
-                String bugID = "Please check the Bug tool Configuration";
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
-                    bugID = MantisReport
-                            .reportIssue(scenario.getName(), GlobalUtil.errorMsg, "General",
-                                    "Automated on Browser: " + GlobalUtil.getCommonSettings().getBrowser()
-                                            + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
-                                    imagePath);
-                }
-
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-                    // getting the os name to report the bug
-                    String osName = System.getProperty("os.name");
-                    if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
-                        osName = GlobalUtil.getCommonSettings().getRemoteOS();
-                    }
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on OS: " + osName + ",\n Automated on Browser: "
-                                    + GlobalUtil.getCommonSettings().getBrowser() + ",\n Build Name: "
-                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
-                                    + GlobalUtil.errorMsg,
-                            imagePath);
-                }
-
-                // updating the results in Test Management tool
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-                    GlobalUtil.testlinkapi
-                            .updateTestLinkResult(
-                                    testId, "Please find the BUGID in "
-                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
-                                    TestLinkAPIResults.TEST_PASSED);
-                }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testId, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
-
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
-                    GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_FAILED);
-
-
-                if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-                    KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_FAILED);
+//                scenario.write("Current Page URL is " + GlobalUtil.getDriver().getCurrentUrl());
+//
+//                byte[] screenshot = KeywordUtil.takeScreenshot(imagePath);
+//                scenario.embed(screenshot, "image/png");
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport
+//                            .reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                                    "Automated on Browser: " + GlobalUtil.getCommonSettings().getBrowser()
+//                                            + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+//                                    imagePath);
+//                    //screenshotFilePath);
+//                }
+//
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//                    // getting the os name to report the bug
+//                    String osName = System.getProperty("os.name");
+//                    if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
+//                        osName = GlobalUtil.getCommonSettings().getRemoteOS();
+//                    }
+//                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//                            "Automated on OS: " + osName + ",\n Automated on Browser: "
+//                                    + GlobalUtil.getCommonSettings().getBrowser() + ",\n Build Name: "
+//                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
+//                                    + GlobalUtil.ErrorMsg,
+//                            imagePath);
+//                }
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            LogUtil.infoLog(Hooks.class,
+
+            LogUtil.infoLog(getClass(),
                     "Test has ended closing browser: " + GlobalUtil.getCommonSettings().getBrowser());
-            // updating the results in Test management tool
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-                GlobalUtil.testlinkapi.updateTestLinkResult(testId, "This test is passed",
-                        TestLinkAPIResults.TEST_PASSED);
-            }
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                GlobalUtil.jiraapi.updateJiraTestResults(testId, "This test is passed", "Pass");
-            }
-
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Azure DevOps"))
-                GlobalUtil.azureDevOpsApi.updateTestStatusByTestPoint(testId, ADO_TEST_STATUS_PASSED);
-
-            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-                KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
-        }
-
-        // close the browsers
-        if (Boolean.parseBoolean(ConfigReader.getValue("closeBrowserAfterScenario"))) {
-            DriverUtil.closeAllDriver();
-        }
-        //method to reset counter for skip execution at a step definition
-        BaseStepDefinitions.resetCounter();
-        RunCukesTest.extent.endTest(RunCukesTest.logger);
-        RunCukesTest.extent.flush();
-    }
-
-    //    @After("")
-    public void afterAPIMethod(Scenario scenario) {
-        String testName;
-
-//        if (scenario.getName().contains("_"))
-//            testName = scenario.getName().split("_")[0].trim();
-//        else
-        testName = scenario.getName();
-
-        if (scenario.isFailed()) {
-            try {
-
-                // report the bug
-                String bugID = "Please check the Bug tool Configuration";
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
-                    bugID = MantisReport.reportIssue(scenario.getName(), GlobalUtil.errorMsg, "General",
-                            " Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(), "RestAPI");
-                }
-
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-                    // getting the os name to report the bug
-                    String osName = System.getProperty("os.name");
-                    if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
-                        osName = GlobalUtil.getCommonSettings().getRemoteOS();
-                    }
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on OS: " + osName + "on Build Name: "
-                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
-                                    + GlobalUtil.errorMsg,
-                            "RestAPI");
-                }
-
-                // updating the results in Test mangement tool
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-                    GlobalUtil.testlinkapi
-                            .updateTestLinkResult(
-                                    testName, "Please find the BUGID in "
-                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
-                                    TestLinkAPIResults.TEST_PASSED);
-                }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-
-            LogUtil.infoLog(Hooks.class, "API Test has ended ");
             // updating the results in Testmangement tool
             if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
                 GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
@@ -308,76 +262,204 @@ public class Hooks {
         }
 
         // close the browsers
+        DriverUtil.closeAllDriver();
         RunCukesTest.extent.endTest(RunCukesTest.logger);
     }
 
-    //    @After("")
-    public void afterMobileTestMethod(Scenario scenario) {
-        String testName;
 
-//        if (scenario.getName().contains("_"))
-//            testName = scenario.getName().split("_")[0].trim();
-//        else
-        testName = scenario.getName();
 
+
+//    @After("@APItestsSmoke")
+//    public void afterAPIMethodSmoke(Scenario scenario) {
+//        String testName = scenario.getName().split("_")[0].trim();
+//        if (scenario.isFailed()) {
+//            try {
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                            " Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(), "RestAPI");
+//                }
+//
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//                    // getting the os name to report the bug
+//                    String osName = System.getProperty("os.name");
+//                    if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
+//                        osName = GlobalUtil.getCommonSettings().getRemoteOS();
+//                    }
+//                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//                            "Automated on OS: " + osName + "on Build Name: "
+//                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
+//                                    + GlobalUtil.ErrorMsg,
+//                            "RestAPI");
+//                }
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//
+//            LogUtil.infoLog("TestEnded", "API Test has ended ");
+//            // updating the results in Testmangement tool
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+//                        TestLinkAPIResults.TEST_PASSED);
+//            }
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+//            }
+//        }
+//
+//        // close the browsers
+//        RunCukesTest.extent.endTest(RunCukesTest.logger);
+//    }
+////
+////    @After("@MobileTest1")
+////    public void afterMobileMethod(Scenario scenario) {
+////        String testName = scenario.getName().split("_")[0].trim();
+////        if (scenario.isFailed()) {
+////            try {
+////                String scFileName = "ScreenShot_" + System.currentTimeMillis();
+////                String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
+////
+//                // imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
+//                // pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
+//                // RunCukesTest.logger.log(LogStatus.FAIL,
+//                // HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) +
+//                // GlobalUtil.e);
+//
+//                // scenario.write("Current Page URL is " +
+//                // GlobalUtil.getMDriver().getCurrentUrl());
+//
+//                // byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+//
+//                // scenario.embed(screenshot, "image/png");
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+//                            screenshotFilePath);
+//                }
+//
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+//                                    + ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+//                            screenshotFilePath);
+//                }
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//
+//            LogUtil.infoLog("TestEnded",
+//                    "Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
+//            // updating the results in Testmangement tool
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+//                        TestLinkAPIResults.TEST_PASSED);
+//            }
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+//            }
+//        }
+//
+//        // close the browsers
+//
+//        // We need to write the quit for local mobile device for time being we commented
+//        // for browser stack
+//        GlobalUtil.getMDriver().quit();
+//        RunCukesTest.extent.endTest(RunCukesTest.logger);
+//    }
+    @After("@MobileTest4")
+    public void afterMobileMethods(Scenario scenario) {
+        String testName = scenario.getName().split("_")[0].trim();
         if (scenario.isFailed()) {
             try {
                 String scFileName = "ScreenShot_" + System.currentTimeMillis();
                 String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
 
                 imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
-
-                InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = IOUtils.toByteArray(is);
-                Thread.sleep(2000);
-                String base64 = Base64.getEncoder().encodeToString(imageBytes);
-                pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
+                pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
                 RunCukesTest.logger.log(LogStatus.FAIL,
-                        HTMLReportUtil.failStringRedColor("Failed at point: " + KeywordUtil.getCurrentUrl() + pathForLogger) + GlobalUtil.e);
+                        HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) +
+                                GlobalUtil.e);
 
-                byte[] screenshot = KeywordUtil.takeMobileScreenshot(imagePath);
-                scenario.attach(screenshot, "image/png", "Failed Screenshot");
-
-
-                // report the bug
-                String bugID = "Please check the Bug tool Configuration";
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
-                    bugID = MantisReport.reportIssue(scenario.getName(), GlobalUtil.errorMsg, "General",
-                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
-                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
-                            screenshotFilePath);
-                }
-
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
-                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
-                                    + ". \n\n\n\n" + GlobalUtil.errorMsg,
-                            screenshotFilePath);
-                }
-
-                // updating the results in Testmangement tool
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
-                    GlobalUtil.testlinkapi
-                            .updateTestLinkResult(
-                                    testName, "Please find the BUGID in "
-                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
-                                    TestLinkAPIResults.TEST_PASSED);
-                }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
-
-                if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-                    KeywordUtil.markTestAsPassedInBrowserStackMobile(BSTACK_FAILED);
+//                scenario.write("Current Page URL is " +
+//                        GlobalUtil.getMDriver().getCurrentUrl());
+//
+//                byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+//
+//                scenario.embed(screenshot, "image/png");
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+//                            screenshotFilePath);
+//                }
+//
+//				/*if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//					bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//							"Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//									+ ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+//									+ ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+//							screenshotFilePath);
+//				}*/
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
 
-            LogUtil.infoLog(Hooks.class,
+            LogUtil.infoLog(getClass(),
                     "Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
             // updating the results in Testmangement tool
             if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
@@ -387,18 +469,355 @@ public class Hooks {
             if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
                 GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
             }
-
-            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
-                KeywordUtil.markTestAsPassedInBrowserStackMobile(BSTACK_PASSED);
         }
 
         // close the browsers
 
-        // We need to write the quit for local mobile device for time being we
-        // commented
+        // We need to write the quit for local mobile device for time being we commented
         // for browser stack
         GlobalUtil.getMDriver().quit();
         RunCukesTest.extent.endTest(RunCukesTest.logger);
     }
+
+
+//    @After("@MobileTest")
+//    //public void afterMobileTestMethod(Scenario scenario) {
+//        String testName = scenario.getName().split("_")[0].trim();
+//        if (scenario.isFailed()) {
+//            try {
+//                String scFileName = "ScreenShot_" + System.currentTimeMillis();
+//                String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
+//
+//                // imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
+//                // pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
+//                // RunCukesTest.logger.log(LogStatus.FAIL,
+//                // HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) +
+//                // GlobalUtil.e);
+//
+//                // scenario.write("Current Page URL is " +
+//                // GlobalUtil.getMDriver().getCurrentUrl());
+//
+//                // byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+//
+//                // scenario.embed(screenshot, "image/png");
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+//                            screenshotFilePath);
+//                }
+//
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+//                                    + ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+//                            screenshotFilePath);
+//                }
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//
+//            LogUtil.infoLog(getClass(),
+//                    "Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
+//            // updating the results in Testmangement tool
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+//                        TestLinkAPIResults.TEST_PASSED);
+//            }
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+//            }
+//        }
+//
+//        // close the browsers
+//
+//        // We need to write the quit for local mobile device for time being we commented
+//        // for browser stack
+//        GlobalUtil.getMDriver().quit();
+//        RunCukesTest.extent.endTest(RunCukesTest.logger);
+//    }
+
+
+
+//    @After("@MobileTestSmoke")
+//    public void afterMobileMethodSmoke(Scenario scenario) {
+//        String testName = scenario.getName().split("_")[0].trim();
+//        if (scenario.isFailed()) {
+//            try {
+//                String scFileName = "ScreenShot_" + System.currentTimeMillis();
+//                String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
+//
+//                imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
+//                pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
+//                RunCukesTest.logger.log(LogStatus.FAIL,
+//                        HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) + GlobalUtil.e);
+
+                // scenario.write("Current Page URL is " +
+                // GlobalUtil.getDriver().getCurrentUrl());
+
+//                byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+//                scenario.embed(screenshot, "image/png");
+//
+//                // report the bug
+//                String bugID = "Please check the Bug tool Configuration";
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+//                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+//                            screenshotFilePath);
+//                }
+
+//                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+//                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+//                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+//                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+//                                    + ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+//                            screenshotFilePath);
+//                }
+//
+//                // updating the results in Testmangement tool
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                    GlobalUtil.testlinkapi
+//                            .updateTestLinkResult(
+//                                    testName, "Please find the BUGID in "
+//                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+//                                    TestLinkAPIResults.TEST_PASSED);
+//                }
+//                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+//                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//
+//            LogUtil.infoLog(getClass(),
+//                    "Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
+//            // updating the results in Testmangement tool
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+//                        TestLinkAPIResults.TEST_PASSED);
+//            }
+//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+//            }
+//        }
+
+
+			/*@Before("@MobileTest6")
+			public void beforeMobileMethods(Scenario scenario) throws Exception {
+
+			testCaseDescription = scenario.getName().split("_")[1];
+			RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+
+			LogUtil.infoLog(getClass(),
+					"\n+----------------------------------------------------------------------------------------------------------------------------+");
+			LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
+
+			LogUtil.infoLog("Mobile Test Environment",
+					"Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
+
+			//GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+		  // GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
+		}
+
+
+	@After("@MobileTest6")
+		public void afterMobileMethod6(Scenario scenario) {
+			String testName = scenario.getName().split("_")[0].trim();
+			if (scenario.isFailed()) {
+				try {
+					String scFileName = "ScreenShot_" + System.currentTimeMillis();
+					String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
+
+					// imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
+					// pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
+					// RunCukesTest.logger.log(LogStatus.FAIL,
+					// HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) +
+					// GlobalUtil.e);
+
+					// scenario.write("Current Page URL is " +
+					// GlobalUtil.getMDriver().getCurrentUrl());
+
+					// byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+
+					// scenario.embed(screenshot, "image/png");
+
+					// report the bug
+					String bugID = "Please check the Bug tool Configuration";
+					if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+						bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+								"Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+										+ " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+								screenshotFilePath);
+					}
+
+					if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+						bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+								"Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+										+ ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+										+ ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+								screenshotFilePath);
+					}
+
+					// updating the results in Testmangement tool
+					if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+						GlobalUtil.testlinkapi
+								.updateTestLinkResult(
+										testName, "Please find the BUGID in "
+												+ GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+										TestLinkAPIResults.TEST_PASSED);
+					}
+					if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+						GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+								+ GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+
+				LogUtil.infoLog("TestEnded",
+						"Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
+				// updating the results in Testmangement tool
+				if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+					GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+							TestLinkAPIResults.TEST_PASSED);
+				}
+				if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+					GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+				}
+			}
+
+			// close the browsers
+
+			// We need to write the quit for local mobile device for time being we commented
+			// for browser stack
+			GlobalUtil.getMDriver().quit();
+			RunCukesTest.extent.endTest(RunCukesTest.logger);
+		}
+		// close the browsers
+		GlobalUtil.getMDriver().quit();
+		RunCukesTest.extent.endTest(RunCukesTest.logger);
+	}
+*/
+        //    }
+
+//            @Before("@MobileTest6")
+//            public void beforeMobileMethodss (Scenario scenario) throws Exception {
+//
+//                testCaseDescription = scenario.getName().split("_")[1];
+//                RunCukesTest.logger = RunCukesTest.extent.startTest(testCaseDescription);
+//
+//                LogUtil.infoLog(getClass(),
+//                        "\n+----------------------------------------------------------------------------------------------------------------------------+");
+//                LogUtil.infoLog(getClass(), "Mobile Tests Started: " + scenario.getName());
+//
+//                LogUtil.infoLog(getClass(),
+//                        "Mobile Test is executed in OS: " + GlobalUtil.getCommonSettings().getAndroidName());
+//
+//                //GlobalUtil.setMDriver(DriverUtil.getMobileApp());
+//                // GlobalUtil.setMDriver(DriverUtil.getMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv()));
+//            }
+
+//            @After("@MobileTest6")
+//            public void afterMobileMethodss (Scenario scenario){
+//                String testName = scenario.getName().split("_")[0].trim();
+//                if (scenario.isFailed()) {
+//                    try {
+//                        String scFileName = "ScreenShot_" + System.currentTimeMillis();
+//                        String screenshotFilePath = ConfigReader.getValue("screenshotPath") + "\\" + scFileName + ".png";
+//
+//                        // imagePath = HTMLReportUtil.testFailMobileTakeScreenshot(screenshotFilePath);
+//                        // pathForLogger = RunCukesTest.logger.addScreenCapture(imagePath);
+//                        // RunCukesTest.logger.log(LogStatus.FAIL,
+//                        // HTMLReportUtil.failStringRedColor("Failed at point: " + pathForLogger) +
+//                        // GlobalUtil.e);
+//
+//                        // scenario.write("Current Page URL is " +
+//                        // GlobalUtil.getMDriver().getCurrentUrl());
+//
+//                        // byte[] screenshot = KeywordUtil.takeMobileScreenshot(screenshotFilePath);
+//
+//                        // scenario.embed(screenshot, "image/png");
+//
+//                        // report the bug
+////                String bugID = "Please check the Bug tool Configuration";
+////                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
+////                    bugID = MantisReport.reporIssue(scenario.getName(), GlobalUtil.ErrorMsg, "General",
+////                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+////                                    + " and Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber(),
+////                            screenshotFilePath);
+////                }
+////
+////                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
+////                    bugID = GlobalUtil.jiraapi.reporIssue(scenario.getName(),
+////                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
+////                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
+////                                    + ". \n\n\n\n" + GlobalUtil.ErrorMsg,
+////                            screenshotFilePath);
+////                }
+////
+////                // updating the results in Testmangement tool
+////                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+////                    GlobalUtil.testlinkapi
+////                            .updateTestLinkResult(
+////                                    testName, "Please find the BUGID in "
+////                                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
+////                                    TestLinkAPIResults.TEST_PASSED);
+////                }
+////                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+////                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
+////                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
+////                }
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//
+//                    LogUtil.infoLog(getClass(),
+//                            "Test has ended closing Application: " + GlobalUtil.getCommonSettings().getAndroidName());
+//                    // updating the results in Testmangement tool
+//                    if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
+//                        GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
+//                                TestLinkAPIResults.TEST_PASSED);
+//                    }
+//                    if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
+//                        GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
+//                    }
+//                }
+//
+//                // close the browsers
+//
+//                // We need to write the quit for local mobile device for time being we commented
+//                // for browser stack
+//                GlobalUtil.getMDriver().quit();
+//                RunCukesTest.extent.endTest(RunCukesTest.logger);
+//            }
+//
+//        }
 
 }

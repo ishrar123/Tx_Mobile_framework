@@ -38,6 +38,8 @@ public class GlobalUtil {
     private static String currentSuiteName;
     private static String currentUserEmail;
     private static String currentUserType;
+
+    public static String ErrorMsg;
     /**
      * The Current user first name.
      */
@@ -373,7 +375,7 @@ public class GlobalUtil {
      * @return the driver
      */
     public static WebDriver getDriver() {
-        return driver;
+        return mdriver;
     }
 
     /**

@@ -8,6 +8,10 @@ public class AndriodConstants {
 		public static final String type_name = "name";
 		public static final String type_id = "id";
 		public static final String type_class = "classname";
+		public static final String accept_button_chrome = "terms_accept";
+		public static final String no_thanks_button_chrome = "negative_button";
+		public static final String close_language = "infobar_close_button";
+		public static final String  button="//android.widget.Button[@text='%s']";
 	}
 
 	public static class Cloudfm {

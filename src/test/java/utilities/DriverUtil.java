@@ -175,6 +175,30 @@ public class DriverUtil {
 
     }
 
+    public static AndroidDriver<MobileElement> invokeLocalMobileApp(String exeEnv, String deviceDetails) {
+
+        String deviceName = deviceDetails.split("_")[0];
+        String osVersion = deviceDetails.split("_")[1];
+
+        System.out.println(deviceName);
+        System.out.println(osVersion);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, osVersion);
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobileKeywords.GetValue("platformName"));
+//		capabilities.setCapability("chromedriverExecutable","C:\\Users\\Diksha\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        capabilities.setCapability("appPackage", "com.android.chrome");
+        capabilities.setCapability("appActivity", "com.google.android.apps.chrome.Main");
+        try {
+            GlobalUtil.mdriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            System.err.println("");
+            e.printStackTrace();
+        }
+        GlobalUtil.mdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        RunCukesTest.logger.log(LogStatus.INFO, "<font color=blue>Execution Done By The Device:" +deviceDetails+"</font>");
+        return GlobalUtil.mdriver;
+    }
     /**
      * Invoke local mobile app android driver.
      *
@@ -182,31 +206,6 @@ public class DriverUtil {
      * @param deviceDetails the device details
      * @return the android driver
      */
-    public static AndroidDriver<MobileElement> invokeLocalMobileApp(String exeEnv, String deviceDetails) {
-
-        String deviceName = deviceDetails.split("_")[0];
-        String osVersion = deviceDetails.split("_")[1];
-
-        LogUtil.infoLog(DriverUtil.class, deviceName);
-        LogUtil.infoLog(DriverUtil.class, osVersion);
-
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, osVersion);
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobileKeywords.GetValue("platformName"));
-        capabilities.setCapability("appPackage", "in.amazon.mShop.android.shopping");
-        capabilities.setCapability("appActivity", "com.amazon.mShop.home.HomeActivity");
-        try {
-            GlobalUtil.mdriver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            LogUtil.infoLog(DriverUtil.class, e.getMessage());
-            e.printStackTrace();
-        }
-        GlobalUtil.mdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        RunCukesTest.logger.log(LogStatus.INFO,
-                "<font color=blue>Execution Done By The Device:" + deviceDetails + "</font>");
-        return GlobalUtil.mdriver;
-    }
 
     /**
      * Invoke local mobile app 1 android driver.

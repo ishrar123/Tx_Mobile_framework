@@ -1,11 +1,13 @@
-@CBA_testcases
+@MobileTest4
 Feature: CBA Application
 
   Background:
-    Given user is on the application
+    Given open the Chrome app on "emulator-5554_11.0.0"
+    And opening Christian brothers dashboard in chrome
 
-  @CBA_100 @CBA4
+  @CBA_100 @CBA
   Scenario:148_Verify tapping the "Previous" button takes the user to the Drop Off/SAW screen with the selected option displayed
+
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -803,7 +805,6 @@ Feature: CBA Application
 
   @CBA_25 @CBA1
   Scenario:209_Verify the hover functionality of "Cancel" button
-    Given user is on the application
     Then hover on "Cancel" button
 
   @CBA_38 @CBA1
@@ -973,7 +974,6 @@ Feature: CBA Application
 
   @CBA_94 @CBA6
   Scenario:235_Verify if "After Hours" drop off is chosen, a modal appears
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -985,7 +985,6 @@ Feature: CBA Application
 
   @CBA_95 @CBA6
   Scenario:236_Verify the text for the after hours modal
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -1002,7 +1001,6 @@ Feature: CBA Application
 
   @CBA_96 @CBA6
   Scenario:237_Verify the after hours modal contains a "Done" button
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -1014,7 +1012,6 @@ Feature: CBA Application
 
   @CBA_97 @CBA6
   Scenario:238_Verify, when clicked, the after hours "Done" button closes the modal and returns the user to the time/date screen
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -1027,7 +1024,6 @@ Feature: CBA Application
 
   @CBA_98 @CBA6
   Scenario:239_Verify the presence of the X icon in the after hours modal
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -1039,7 +1035,6 @@ Feature: CBA Application
 
   @CBA_99 @CBA6
   Scenario:240_Verify clicking the X icon in the after hours modal closes the modal and returns the user to the time/date screen
-    Given user is on the application
     When user selects "Oil Change" in "services"
     And click on "Continue" button
     When user is navigated to "dropoff" screen
@@ -1418,79 +1413,7 @@ Feature: CBA Application
     When user clicks on the "Common Services" "1"  button
     Then user not able to see "Other" in "services"
 
-#  @CBA_02 @CBA
-#  Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
-#    When user clicks on the "Something's Wrong" "2"  button
-#    Then user is able to see an informative page with description of all the car services
-#
-#  @CBA_03 @CBA
-#  Scenario: 145_Verify functionality of toggle arrow button in Common Services
-#    When user clicks on the "Common Services" "1" toggle button
-#    Then user is not able to see the services in common services
-#    When user clicks on the "Common Services" "1" toggle button
-#    Then user is able to see the services in the common servicess
-#
-#  @CBA_04 @CBA
-#  Scenario:146_Verify that  user select one or multiple "Common services" options at a time.
-#    When user selects "Oil Change" in "services"
-#    When user selects "Alignment" in "services"
-#    When user selects "Tire Rotation" in "services"
-#
-#  @CBA_05 @CBA
-#  Scenario: 147_Verify functionality of toggle arrow button in 'Something's wrong'.
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    Then user is not able to see the services in something wrong
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    Then user is able to see the services in the something_s wrongs
-
-#  @CBA_06
-#  Scenario:  CBA_06_Verify when "Common services" up-arrow button is tapped again after selecting services, the services remain selected
-#
-#    When  user selects "Alignment" in "services"
-#    When user clicks on the "Common Services" "1" toggle button
-#    When user clicks on the "Common Services" "1" toggle button
-#    Then "Alignment" services should be activated
-#
-#
-#  @CBA_07
-#  Scenario:  CBA_07_Verify when "Something's wrong" up-arrow button is tapped again after selecting services, the services remain selected.
-#
-#    When user selects "Brakes" in "services"
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    When user clicks on the "Something's Wrong" "2" toggle button
-#    Then "Brakes" services should be activated
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  @CBA_02 @CBA4
+  Scenario:144_Verify that "i" icon displays with "something's wrong" category information.
+    When user clicks on the "Something's Wrong" "2"  button
+    Then user is able to see an informative page with description of all the car services

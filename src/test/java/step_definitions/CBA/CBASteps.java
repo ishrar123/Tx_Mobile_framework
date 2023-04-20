@@ -1,12 +1,16 @@
 package step_definitions.CBA;
 
 import com.relevantcodes.extentreports.LogStatus;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en_scouse.An;
+import mobileutil.AndriodConstants;
+import mobileutil.MobileKeywords;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +26,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import static mobileutil.MobileKeywords.executionDelay;
 
 public class CBASteps extends KeywordUtil {
 
@@ -39,8 +46,10 @@ public class CBASteps extends KeywordUtil {
 
         String url = ConfigReader.getValue("CBA_URL");
         System.out.println("the url is:" + url);
+        navigateToUrl(url);
+
         //driver.get("https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota");
-        navigateToUrl("https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota");
+        //navigateToUrl("https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota");
     }
 
     @When("user clicks on the {string} {string}  button")
@@ -1621,6 +1630,51 @@ public class CBASteps extends KeywordUtil {
         System.out.println("the  current make is : " +get_model);
 
     }
+
+    @Given("^open the Chrome app on \"([^\"]*)\"$")
+    public void open_the_Chrome_app(String deviceDetails) {
+        try {
+            KeywordUtil.cucumberTagName = "MobileTestsAmazon";
+            if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Local"))
+                DriverUtil.invokeLocalMobileApp(GlobalUtil.getCommonSettings().getExecutionEnv(), deviceDetails);
+
+            else if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
+                DriverUtil.invokeBrowserStackMobileApp(deviceDetails);
+
+        } catch (Exception e) {
+            GlobalUtil.ErrorMsg = e.getMessage();
+            Assert.fail(e.getMessage());
+        }
+
+    }
+
+    @And("^opening Christian brothers dashboard in chrome$")
+    public void opening_Christian_brothers_dashboard_in_chrome () throws Throwable {
+        MobileKeywords.click(AndriodConstants.Common.accept_button_chrome, AndriodConstants.Common.type_id,
+                "Click on Accept Button in Chrome Browser");
+
+        MobileKeywords.click(AndriodConstants.Common.no_thanks_button_chrome, AndriodConstants.Common.type_id,
+                "Click on No Thanks Button in Chrome Browser");
+        executionDelay(3000);
+
+        WebElement urlBar = mdriver.findElement(By.id("com.android.chrome:id/search_box_text"));
+        urlBar.sendKeys("https://cbascheduler-frontend-dev.azurewebsites.net/south-sarasota");
+        executionDelay(3000);
+        mdriver.pressKey(new KeyEvent(AndroidKey.ENTER));
+        executionDelay(5000);
+
+        MobileKeywords.click(AndriodConstants.Common.close_language, AndriodConstants.Common.type_id,
+                "Click on Close Language In Button In Chrome Browser");
+        executionDelay(3000);
+
+        Set<String> handles = mdriver.getContextHandles();
+
+        for (String context : handles) {
+            System.out.println(context);
+        }
+        mdriver.context("WEBVIEW_chrome");
+    }
+
 }
 
 
